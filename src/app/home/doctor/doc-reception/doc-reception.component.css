@@ -1,0 +1,28 @@
+.wrapper-patient {
+  display: flex;
+}
+
+.left-div-patient {
+  width: 20%;
+}
+
+.right-div-patient {
+  width: 80%;
+  padding-left: 10px;
+}
+
+img {
+  width: 100%;
+}
+
+h3, p {
+  margin: 0;
+}
+
+mat-button-toggle-group {
+  width: 100%;
+}
+
+.mat-button-toggle {
+  width: 25%;
+}

@@ -1,0 +1,30 @@
+mat-button-toggle-group {
+  width: 100%;
+}
+
+.button-my-page {
+  width: 20%;
+  height: auto;
+}
+
+.button-exit {
+  width: 20%;
+  height: auto;
+}
+
+.button-record-result {
+  width: 60%;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.left-panel {
+  width: 20%;
+}
+
+.router-outlet {
+  width: 80%;
+  padding: 5px;
+}

@@ -1,0 +1,46 @@
+<div *ngIf="!patient">
+  <p style="margin-bottom: 0">Введіть електронну пошту пацієнта:</p><br>
+  <form #form='ngForm'>
+    <mat-form-field>
+      <input matInput
+             type="email"
+             name="username"
+             placeholder="email"
+             required
+             ngModel>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" [disabled]="!form.valid"
+            (click)="findPatient(form)">знайти
+    </button>
+  </form>
+</div>
+
+
+<div *ngIf="patient">
+
+  <div class="wrapper-patient">
+    <div class="left-div-patient">
+      <img [src]="'http://localhost:8080/images/' + patient.image" alt="image2">
+    </div>
+
+    <div class="right-div-patient">
+      <h3>{{patient.surname}} {{patient.name}} {{patient.fatherName}}</h3>
+      <p>Дата народження: {{patient.dateOfBirth}}<br>
+        Телефон: {{patient.phone}}<br>
+        Ел.пошта: {{patient.username}}</p>
+    </div>
+    <div></div>
+  </div>
+
+  <div>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle checked value="" (click)="toHistoryVisits()">історія оглядів</mat-button-toggle>
+      <mat-button-toggle value="" (click)="toHistoryAnalyzes()">історія аналізів</mat-button-toggle>
+      <mat-button-toggle value="" (click)="toRecordResult()">внести результати прийому</mat-button-toggle>
+      <mat-button-toggle value="" (click)="toRecordIndicators()">заміри показників</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>

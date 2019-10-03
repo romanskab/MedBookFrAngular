@@ -1,0 +1,25 @@
+<form *ngIf="!speciality">
+  <mat-form-field>
+    <mat-label>спеціальність</mat-label>
+    <mat-select [(ngModel)]="speciality" name="spec" (selectionChange)="getDoctorsBySpecialize()">
+      <mat-option *ngFor="let s of specialities" [value]="s">{{s}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+</form>
+<div *ngIf="speciality">
+{{speciality}}
+</div>
+
+<form *ngIf="speciality && !doctor">
+  <mat-form-field>
+    <mat-label>лікар</mat-label>
+    <mat-select [(ngModel)]="doctor" name="spec">
+      <mat-option *ngFor="let d of doctors" [value]="d">{{d.surname}} {{d.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+</form>
+<div *ngIf="doctor">
+{{doctor.surname}} {{doctor.name}}
+</div>

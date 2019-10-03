@@ -1,0 +1,28 @@
+<p>doc-work-calendar works!</p>
+<form>
+  <mat-form-field>
+    <input matInput
+           type="date"
+           placeholder="дата"
+           name="date"
+           [(ngModel)]="calendarOfVisits.date"
+           required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Формування календаря</mat-label>
+    <mat-select [(ngModel)]="times" name="times" multiple>
+      <mat-option value="09:00">09:00</mat-option>
+      <mat-option value="10:00">10:00</mat-option>
+      <mat-option value="11:00">11:00</mat-option>
+      <mat-option value="12:00">12:00</mat-option>
+      <mat-option value="14:00">14:00</mat-option>
+      <mat-option value="15:00">15:00</mat-option>
+      <mat-option value="16:00">16:00</mat-option>
+      <mat-option value="17:00">17:00</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" (click)="create()">Записати</button>
+</form>

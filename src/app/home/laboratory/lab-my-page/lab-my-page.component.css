@@ -1,0 +1,24 @@
+.wrapper{
+  margin-left: 10%;
+}
+
+.top-div {
+  display: flex;
+}
+
+.bottom-div{
+
+}
+
+.left-top-div {
+  width: 30%;
+}
+
+.right-top-div {
+  width: 70%;
+  padding-left: 20px;
+}
+
+img {
+  width: 100%;
+}

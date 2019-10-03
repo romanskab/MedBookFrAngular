@@ -1,0 +1,16 @@
+
+<form #loginForm='ngForm'>
+  <p>Вхід</p>
+  <mat-form-field>
+    <input matInput name="username" type="text" placeholder="email" required [(ngModel)]="userLog.username">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput name="password" type="password" placeholder="password" required [(ngModel)]="userLog.password">
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Увійти</button>
+  <button mat-stroked-button color="primary" (click)="register()">Реєстрація</button>
+
+</form>

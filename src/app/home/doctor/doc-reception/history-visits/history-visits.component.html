@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>Дата</th>
+    <th>Лікар</th>
+    <th>Результат огляду</th>
+  </tr>
+  <tr *ngFor="let visit of visitsToDoctors">
+    <td>{{visit.date}}</td>
+    <td style="text-align: center">{{visit.doctor.surname}} {{visit.doctor.name}}</td>
+    <td>{{visit.conclusion}}</td>
+  </tr>
+</table>

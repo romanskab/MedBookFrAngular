@@ -1,0 +1,107 @@
+<form #form='ngForm'>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="name"
+           placeholder="Назва"
+           minlength="2"
+           required
+           [(ngModel)]="laboratory.name">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="phone"
+           placeholder="телефон"
+           required
+           [(ngModel)]="laboratory.phone">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="region"
+           placeholder="область"
+           minlength="2"
+           required
+           [(ngModel)]="laboratory.region">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="district"
+           placeholder="район"
+           minlength="2"
+           required
+           [(ngModel)]="laboratory.district">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="city"
+           placeholder="місто"
+           minlength="2"
+           required
+           [(ngModel)]="laboratory.city">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="street"
+           placeholder="вулиця"
+           minlength="2"
+           required
+           [(ngModel)]="laboratory.street">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="build"
+           placeholder="будинок"
+           minlength="2"
+           required
+           [(ngModel)]="laboratory.building">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="email"
+           name="email"
+           placeholder="email"
+           required
+           [(ngModel)]="laboratory.username">
+  </mat-form-field>
+  <br>
+
+  Логотип: <input type="file" (change)="photoSelection($event)">
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="password"
+           name="password"
+           placeholder="пароль"
+           minlength="2"
+           required
+           [(ngModel)]="laboratory.password">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="password"
+           name="password2"
+           placeholder="підтвердження пароля"
+           minlength="2"
+           required
+           [(ngModel)]="passValid"><br>
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" [disabled]="!(form.valid && laboratory.password==passValid)"
+          (click)="register()">Зареєструватись
+  </button>
+</form>

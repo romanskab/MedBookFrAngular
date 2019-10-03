@@ -1,0 +1,10 @@
+<p>Реєстрація</p>
+<div>
+  <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle checked value="" (click)="toFormPatient()">Пацієнт</mat-button-toggle>
+    <mat-button-toggle value="" (click)="toFormDoctor()">Лікар</mat-button-toggle>
+    <mat-button-toggle value="" (click)="toFormLaboratory()">Лабораторія</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<router-outlet></router-outlet>

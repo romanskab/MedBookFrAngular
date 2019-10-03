@@ -1,0 +1,97 @@
+<form #form='ngForm'>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="surname"
+           placeholder="Прізвище"
+           minlength="2"
+           required
+           [(ngModel)]="patient.surname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="name"
+           placeholder="Ім'я"
+           minlength="2"
+           required
+           [(ngModel)]="patient.name">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="fatherName"
+           placeholder="По-батькові"
+           minlength="2"
+           required
+           [(ngModel)]="patient.fatherName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="email"
+           name="email"
+           placeholder="email"
+           required
+           [(ngModel)]="patient.username">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="phone"
+           placeholder="телефон"
+           required
+           [(ngModel)]="patient.phone">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           type="date"
+           placeholder="дата народження"
+           name="dateOfBirth"
+           [(ngModel)]="patient.dateOfBirth"
+           required>
+  </mat-form-field>
+  <br>
+
+  Стать:
+  <mat-radio-group name="gender" [(ngModel)]="patient.gender" required>
+    <mat-radio-button value="MALE">
+      чол.
+    </mat-radio-button>
+    <mat-radio-button value="FEMALE">
+      жін.
+    </mat-radio-button>
+  </mat-radio-group>
+  <br><br>
+
+  Фото: <input type="file" (change)="photoSelection($event)">
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="password"
+           name="password"
+           placeholder="пароль"
+           minlength="2"
+           required
+           [(ngModel)]="patient.password">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="password"
+           name="password2"
+           placeholder="підтвердження пароля"
+           minlength="2"
+           required
+           [(ngModel)]="passValid"><br>
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" [disabled]="!(form.valid && patient.password==passValid)"
+          (click)="register()">Зареєструватись
+  </button>
+</form>

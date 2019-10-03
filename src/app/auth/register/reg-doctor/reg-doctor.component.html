@@ -1,0 +1,106 @@
+<form #form='ngForm' enctype="multipart/form-data">
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="surname"
+           placeholder="Прізвище"
+           minlength="2"
+           required
+           [(ngModel)]="doctor.surname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="name"
+           placeholder="Ім'я"
+           minlength="2"
+           required
+           [(ngModel)]="doctor.name">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="fatherName"
+           placeholder="По-батькові"
+           minlength="2"
+           required
+           [(ngModel)]="doctor.fatherName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="email"
+           name="email"
+           placeholder="email"
+           required
+           [(ngModel)]="doctor.username">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="text"
+           name="phone"
+           placeholder="телефон"
+           required
+           [(ngModel)]="doctor.phone">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           type="date"
+           placeholder="дата народження"
+           name="dateOfBirth"
+           [(ngModel)]="doctor.dateOfBirth"
+           required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>спеціальність</mat-label>
+    <mat-select [(ngModel)]="doctor.speciality" name="speciality">
+      <mat-option *ngFor="let speciality of specialities" [value]="speciality">{{speciality}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  Стать:
+  <mat-radio-group name="gender" [(ngModel)]="doctor.gender" required>
+    <mat-radio-button value="MALE">
+      чол.
+    </mat-radio-button>
+    <mat-radio-button value="FEMALE">
+      жін.
+    </mat-radio-button>
+  </mat-radio-group>
+  <br><br>
+
+  Фото: <input type="file" (change)="photoSelection($event)">
+  <br>
+
+  <mat-form-field>
+    <input matInput
+           type="password"
+           name="password"
+           placeholder="пароль"
+           minlength="2"
+           required
+           [(ngModel)]="doctor.password">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput
+           type="password"
+           name="password2"
+           placeholder="підтвердження пароля"
+           minlength="2"
+           required
+           [(ngModel)]="passValid"><br>
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" [disabled]="!(form.valid && doctor.password==passValid)"
+          (click)="register()">Зареєструватись
+  </button>
+</form>
+

@@ -1,0 +1,23 @@
+<form #form='ngForm'>
+  <mat-form-field>
+    <input matInput
+           type="date"
+           placeholder="дата огляду"
+           name="date"
+           [(ngModel)]="visitToDoctor.date"
+           required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <textarea matInput
+              placeholder="заключення лікаря"
+              name="conclusion"
+              [(ngModel)]="visitToDoctor.conclusion"
+              required></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="!(form.valid)"
+          (click)="record()">Записати</button>
+
+</form>

@@ -1,0 +1,22 @@
+<div class="wrapper">
+
+  <div class="top-div" *ngIf="currentLaboratory">
+    <div class="left-top-div">
+      <img [src]="'http://localhost:8080/images/' + currentLaboratory.image" alt="image2">
+    </div>
+
+    <div class="right-top-div">
+      <h3>{{currentLaboratory.name}}</h3>
+      <p>м.{{currentLaboratory.city}}, вул.{{currentLaboratory.street}}, буд.{{currentLaboratory.building}}</p>
+      <p>Телефон: {{currentLaboratory.phone}}</p>
+      <p>Ел.пошта: {{currentLaboratory.username}}</p>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="bottom-div">
+    <p><b>Прийнято пацієнтів з початку місяця - </b></p>
+    <p><b>Прийнято пацієнтів з початку року - </b></p>
+  </div>
+
+</div>

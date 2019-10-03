@@ -1,0 +1,9 @@
+<div class="wrapper" *ngIf="currentLaboratory">
+  <div class="image">
+    <img [src]="'http://localhost:8080/images/' + currentLaboratory.image" alt="image2">
+  </div>
+  <h4>{{currentLaboratory.name}}</h4>
+  <p>{{currentLaboratory.phone}}</p>
+  <p>м.{{currentLaboratory.city}}</p>
+  <p>{{currentLaboratory.username}}</p>
+</div>

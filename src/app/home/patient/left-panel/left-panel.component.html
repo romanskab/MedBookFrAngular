@@ -1,0 +1,9 @@
+<div class="wrapper" *ngIf="currentPatient">
+  <div class="image">
+    <img [src]="'http://localhost:8080/images/' + currentPatient.image" alt="image2">
+  </div>
+  <h4>{{currentPatient.surname}}<br> {{currentPatient.name}}<br> {{currentPatient.fatherName}}</h4>
+  <p>{{currentPatient.phone}}</p>
+  <p>{{currentPatient.dateOfBirth}}</p>
+  <p>{{currentPatient.username}}</p>
+</div>

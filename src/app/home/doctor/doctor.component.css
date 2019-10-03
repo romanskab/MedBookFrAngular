@@ -1,0 +1,21 @@
+mat-button-toggle-group {
+  width: 100%;
+}
+
+.mat-button-toggle {
+  width: 20%;
+  height: auto;
+}
+
+.wrapper{
+  display: flex;
+}
+
+.left-panel{
+  width: 20%;
+}
+
+.router-outlet{
+  width: 80%;
+  padding: 5px;
+}

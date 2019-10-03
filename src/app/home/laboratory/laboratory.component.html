@@ -1,0 +1,16 @@
+<div>
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle class="button-my-page" checked value="" (click)="toMyPage()">Моя сторінка</mat-button-toggle>
+    <mat-button-toggle class="button-record-result" value="" (click)="toRecordResult()">Внесення результатів аналізів</mat-button-toggle>
+    <mat-button-toggle class="button-exit" value="" (click)="exit()">Вихід</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<div class="wrapper">
+  <div class="left-panel" *ngIf="isLeftPanel">
+    <app-lab-left-panel></app-lab-left-panel>
+  </div>
+  <div class="router-outlet">
+    <router-outlet></router-outlet>
+  </div>
+</div>

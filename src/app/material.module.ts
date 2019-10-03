@@ -7,7 +7,7 @@ import {
   MatDatepickerModule,
   MatInputModule,
   MatNativeDateModule,
-  MatRadioModule
+  MatRadioModule, MatSelectModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
@@ -23,7 +23,9 @@ import {FormsModule} from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSelectModule,
+    FormsModule
   ],
   exports: [
     MatButtonModule,
@@ -32,7 +34,9 @@ import {FormsModule} from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class MaterialModule {

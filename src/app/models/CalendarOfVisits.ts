@@ -1,14 +1,14 @@
 import {Doctor} from './Doctor';
 import {Patient} from './Patient';
 
-export class VisitToDoctor {
-
+export class CalendarOfVisits {
   constructor(
     public id?: number,
     public date?: string,
+    public time?: string,
     public doctor?: Doctor,
-    public patient?: Patient,
-    public conclusion?: string
+    public patient?: Patient
   ) {
   }
+
 }
