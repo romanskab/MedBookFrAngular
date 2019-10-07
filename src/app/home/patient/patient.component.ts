@@ -24,6 +24,7 @@ export class PatientComponent implements OnInit {
 
   getCurrentPatient() {
     this.patientService.getCurrentPatient().subscribe(value => {
+      this.patientService.currentPatientSubject.next(value);
       this.currentPatient = value;
     });
   }

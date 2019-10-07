@@ -14,11 +14,11 @@
   <div></div>
 </div>
 
-<div class="bottom-div">
+<div class="bottom-div" *ngIf="lastVisit">
   <p><b>Ріст - </b></p>
   <p><b>Вага - </b></p>
   <p><b>Група крові - </b></p>
-  <p><b>Останній візит до лікаря - </b></p>
+  <p><b>Останній візит до лікаря - </b>{{lastVisit.date}} {{lastVisit.doctor.speciality}}</p>
 </div>
 
 </div>

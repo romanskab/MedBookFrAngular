@@ -47,6 +47,12 @@
            [(ngModel)]="patient.phone">
   </mat-form-field>
 
+<!--  <mat-form-field>-->
+<!--    <input matInput name="dateOfBirth" [(ngModel)]="patient.dateOfBirth" [matDatepicker]="picker" placeholder="Choose a date">-->
+<!--    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--    <mat-datepicker #picker></mat-datepicker>-->
+<!--  </mat-form-field>-->
+
   <mat-form-field>
     <input matInput
            type="date"
@@ -55,6 +61,7 @@
            [(ngModel)]="patient.dateOfBirth"
            required>
   </mat-form-field>
+
   <br>
 
   Стать:

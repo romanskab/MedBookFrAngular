@@ -14,7 +14,7 @@ export class Doctor extends User {
               public username?: string,
               public password?: string,
               public phone?: string,
-              public dateOfBirth?: string,
+              public dateOfBirth?: Date,
               public role?: Role
   ) {
     super(id, name, username, password, role, phone, image);

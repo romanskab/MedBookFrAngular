@@ -1,28 +1,57 @@
-<p>doc-work-calendar works!</p>
-<form>
-  <mat-form-field>
-    <input matInput
-           type="date"
-           placeholder="дата"
-           name="date"
-           [(ngModel)]="calendarOfVisits.date"
-           required>
-  </mat-form-field>
+<div class="top-button" *ngIf="isButtonForCreate">
+  <button mat-stroked-button (click)="toCreate()">Подати графік</button>
+</div>
 
-  <mat-form-field>
-    <mat-label>Формування календаря</mat-label>
-    <mat-select [(ngModel)]="times" name="times" multiple>
-      <mat-option value="09:00">09:00</mat-option>
-      <mat-option value="10:00">10:00</mat-option>
-      <mat-option value="11:00">11:00</mat-option>
-      <mat-option value="12:00">12:00</mat-option>
-      <mat-option value="14:00">14:00</mat-option>
-      <mat-option value="15:00">15:00</mat-option>
-      <mat-option value="16:00">16:00</mat-option>
-      <mat-option value="17:00">17:00</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
+<div class="create-times-visits" *ngIf="isCreate">
+  <h3>Подання робочого графіку</h3>
+  <form #form='ngForm'>
+    <mat-form-field>
+      <input matInput
+             type="date"
+             placeholder="дата"
+             name="date"
+             [(ngModel)]="date"
+             required>
+    </mat-form-field>
+    <br>
 
-  <button mat-raised-button color="primary" (click)="create()">Записати</button>
-</form>
+    <p>години прийому:</p>
+    <select name="times" multiple size="8" [(ngModel)]="times" required>
+      <option value="09:00">09:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+      <option value="14:00">14:00</option>
+      <option value="15:00">15:00</option>
+      <option value="16:00">16:00</option>
+      <option value="17:00">17:00</option>
+    </select><br><br>
+
+    <div class="div-with-buttons">
+      <div class="div-left"></div>
+      <div class="div-center">
+        <button mat-raised-button color="primary" (click)="addWorkTimes()" [disabled]="!form.valid">Надіслати</button>
+      </div>
+      <div class="div-right">
+        <button mat-stroked-button (click)="hideCreate()">сховати</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<table *ngIf="calendar">
+  <tr>
+    <th>Дата</th>
+    <th>Година</th>
+    <th>Пацієнт</th>
+  </tr>
+  <tr *ngFor="let position of calendar">
+    <td>{{position.date}}</td>
+    <td>{{position.time}}</td>
+    <td>
+      <div *ngIf="position.patient">
+        {{position.patient.surname}} {{position.patient.name}}
+      </div>
+    </td>
+  </tr>
+</table>

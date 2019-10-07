@@ -35,7 +35,7 @@ export class DocReceptionComponent implements OnInit {
   }
 
   toHistoryAnalyzes() {
-    this.router.navigate(['doctor', 'reception', 'historyAnalyzes'], {queryParams: {id: this.patient.id}});
+    this.router.navigate(['doctor', 'reception', 'historyAnalyzes']);
   }
 
   toRecordResult() {
@@ -43,6 +43,6 @@ export class DocReceptionComponent implements OnInit {
   }
 
   toRecordIndicators() {
-    this.router.navigate(['doctor', 'reception', 'recordIndicators'], {queryParams: {id: this.patient.id}});
+    this.router.navigate(['doctor', 'reception', 'recordIndicators']);
   }
 }

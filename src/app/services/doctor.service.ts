@@ -4,6 +4,7 @@ import {Doctor} from '../models/Doctor';
 import {Patient} from '../models/Patient';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {VisitToDoctor} from '../models/VisitToDoctor';
+import {CalendarOfVisits} from '../models/CalendarOfVisits';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class DoctorService {
   URLFindPatientByUsername = 'http://localhost:8080/doctor/findPatientByUsername';
   URLSaveVisitToDoctor = 'http://localhost:8080/doctor/saveVisitToDoctor';
   URLGetVisitToDoctorByPatientId = 'http://localhost:8080/doctor/getVisitsToDoctorByPatientId';
+  URLAddWorkTimes = 'http://localhost:8080/doctor/addWorkTimes';
+  URLGetCalendarByDoctorId = 'http://localhost:8080/doctor/calendar';
+  URLGetVisitsByDoctorId = 'http://localhost:8080/doctor/visits';
 
   // @ts-ignore
   currentDoctorSubject = new BehaviorSubject();
@@ -61,4 +65,30 @@ export class DoctorService {
     const URL = this.URLGetVisitToDoctorByPatientId + `/${id}`;
     return this.http.get<VisitToDoctor[]>(URL, {headers});
   }
+
+  getVisitsByDoctorId(id): Observable<VisitToDoctor[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetVisitsByDoctorId + `/${id}`;
+    return this.http.get<VisitToDoctor[]>(URL, {headers});
+  }
+
+  addWorkTimes(doctorId, date, times) {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLAddWorkTimes + `/${doctorId}` + `/${date}`;
+    return this.http.post(URL, times, {headers});
+  }
+
+  getCalendarByDoctorId(id): Observable<CalendarOfVisits[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetCalendarByDoctorId + `/${id}`;
+    return this.http.get<CalendarOfVisits[]>(URL, {headers});
+  }
+
+
 }
