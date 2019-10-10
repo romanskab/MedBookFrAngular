@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorService} from '../../../services/doctor.service';
 import {Doctor} from '../../../models/Doctor';
+import {VisitToDoctor} from '../../../models/VisitToDoctor';
 
 @Component({
   selector: 'app-doc-history-receptions',
@@ -8,22 +9,22 @@ import {Doctor} from '../../../models/Doctor';
   styleUrls: ['./doc-history-receptions.component.css']
 })
 export class DocHistoryReceptionsComponent implements OnInit {
-  currentDoctor: Doctor;
+  visits: VisitToDoctor[] = [];
 
   constructor(private doctorService: DoctorService) {
   }
 
   ngOnInit() {
     this.doctorService.currentDoctorSubject.subscribe(value => {
-      this.currentDoctor = value;
-      console.log(this.currentDoctor.id);
-
-      this.doctorService.getVisitsByDoctorId(value.id).subscribe(value1 => {
-        console.log(this.currentDoctor.id);
-        console.log(value1);
-      });
+      this.getVisits(value.id);
     });
+  }
 
+  getVisits(doctorId) {
+    this.doctorService.getVisitsByDoctorId(doctorId).subscribe(value => {
+      console.log(value);
+      this.visits = value;
+    });
   }
 
 }

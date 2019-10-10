@@ -19,6 +19,7 @@ export class DoctorService {
   URLAddWorkTimes = 'http://localhost:8080/doctor/addWorkTimes';
   URLGetCalendarByDoctorId = 'http://localhost:8080/doctor/calendar';
   URLGetVisitsByDoctorId = 'http://localhost:8080/doctor/visits';
+  URLGetTodayVisits = 'http://localhost:8080/doctor/visitsToday';
 
   // @ts-ignore
   currentDoctorSubject = new BehaviorSubject();
@@ -90,5 +91,12 @@ export class DoctorService {
     return this.http.get<CalendarOfVisits[]>(URL, {headers});
   }
 
+  getTodayVisits(doctorId): Observable<CalendarOfVisits[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetTodayVisits + `/${doctorId}`;
+    return this.http.get<CalendarOfVisits[]>(URL, {headers});
+  }
 
 }

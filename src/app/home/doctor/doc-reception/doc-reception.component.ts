@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {DoctorService} from '../../../services/doctor.service';
 import {Patient} from '../../../models/Patient';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import {VisitToDoctor} from '../../../models/VisitToDoctor';
+import {CalendarOfVisits} from '../../../models/CalendarOfVisits';
 
 @Component({
   selector: 'app-doc-reception',
@@ -10,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./doc-reception.component.css']
 })
 export class DocReceptionComponent implements OnInit {
+  visitsToday: CalendarOfVisits[];
   patient: Patient;
 
   constructor(private doctorService: DoctorService,
@@ -20,6 +23,12 @@ export class DocReceptionComponent implements OnInit {
     if (this.patient != null) {
       this.toHistoryVisits();
     }
+    this.doctorService.currentDoctorSubject.subscribe(doctor => {
+      this.doctorService.getTodayVisits(doctor.id).subscribe(value1 => {
+        console.log(value1);
+        this.visitsToday = value1;
+      });
+    });
   }
 
   findPatient(form: NgForm) {

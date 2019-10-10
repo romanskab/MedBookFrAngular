@@ -1,1 +1,13 @@
 <p>doc-history-receptions works!</p>
+<table *ngIf="visits">
+  <tr>
+    <th>Дата</th>
+    <th>Пацієнт</th>
+    <th>Результат огляду</th>
+  </tr>
+  <tr *ngFor="let visit of visits">
+    <td>{{visit.date}}</td>
+    <td style="text-align: center">{{visit.patient.surname}} {{visit.patient.name}}</td>
+    <td>{{visit.conclusion}}</td>
+  </tr>
+</table>

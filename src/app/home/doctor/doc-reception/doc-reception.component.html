@@ -1,5 +1,5 @@
 <div *ngIf="!patient">
-  <p style="margin-bottom: 0">Введіть електронну пошту пацієнта:</p><br>
+  <p style="margin-bottom: 0">Пошук по електронній пошті пацієнта:</p><br>
   <form #form='ngForm'>
     <mat-form-field>
       <input matInput
@@ -13,6 +13,14 @@
             (click)="findPatient(form)">знайти
     </button>
   </form>
+
+  <p>Пошук серед записаних на сьогодні:</p>
+  <mat-form-field>
+    <mat-label>пацієнти</mat-label>
+    <mat-select [(ngModel)]="patient" name="speciality">
+      <mat-option *ngFor="let v of visitsToday" [value]="v.patient">{{v.patient.surname}} {{v.patient.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
 

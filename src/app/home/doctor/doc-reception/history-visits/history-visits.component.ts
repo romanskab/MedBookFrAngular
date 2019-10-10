@@ -21,9 +21,6 @@ export class HistoryVisitsComponent implements OnInit {
     this.doctorService.patientOnReception.subscribe(value => {
       this.patientId = value.id;
     });
-    // this.activatedRoute.queryParams.subscribe(value => {
-    //   this.patientId = value.id;
-    // });
     this.doctorService.getVisitToDoctorByPatientId(this.patientId).subscribe(value => {
       this.visitsToDoctors = value;
       console.log(this.visitsToDoctors);
