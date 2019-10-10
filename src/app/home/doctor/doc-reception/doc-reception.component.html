@@ -18,7 +18,7 @@
   <mat-form-field>
     <mat-label>пацієнти</mat-label>
     <mat-select [(ngModel)]="patient" name="speciality">
-      <mat-option *ngFor="let v of visitsToday" [value]="v.patient">{{v.patient.surname}} {{v.patient.name}}</mat-option>
+      <mat-option *ngFor="let v of visitsToday" [value]="v.patient">{{v.time}} {{v.patient.surname}} {{v.patient.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 </div>

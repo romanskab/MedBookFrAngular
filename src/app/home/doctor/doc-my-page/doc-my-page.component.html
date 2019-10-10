@@ -7,7 +7,7 @@
 
     <div class="right-top-div">
       <h3>{{currentDoctor.surname}} {{currentDoctor.name}} {{currentDoctor.fatherName}}</h3>
-      <p>Спеціалізація: {{currentDoctor.speciality}}</p>
+      <p>Спеціалізація: {{currentDoctor.speciality | lowercase}}</p>
       <p>Телефон: {{currentDoctor.phone}}</p>
       <p>Ел.пошта: {{currentDoctor.username}}</p>
     </div>

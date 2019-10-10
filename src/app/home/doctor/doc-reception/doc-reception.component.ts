@@ -25,6 +25,7 @@ export class DocReceptionComponent implements OnInit {
     }
     this.doctorService.currentDoctorSubject.subscribe(doctor => {
       this.doctorService.getTodayVisits(doctor.id).subscribe(value1 => {
+        console.log('записані на сьогодні:');
         console.log(value1);
         this.visitsToday = value1;
       });

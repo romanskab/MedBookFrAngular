@@ -2,7 +2,7 @@
   <mat-form-field>
     <mat-label>спеціальність</mat-label>
     <mat-select [(ngModel)]="speciality" name="spec" (selectionChange)="getDoctorsBySpecialize()">
-      <mat-option *ngFor="let s of specialities" [value]="s">{{s}}</mat-option>
+      <mat-option *ngFor="let s of specialities" [value]="s">{{s | lowercase}}</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
