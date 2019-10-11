@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DoctorService} from '../../../../services/doctor.service';
-import {VisitToDoctor} from '../../../../models/VisitToDoctor';
+import {Visit} from '../../../../models/Visit';
 
 @Component({
   selector: 'app-record-result',
@@ -9,10 +9,8 @@ import {VisitToDoctor} from '../../../../models/VisitToDoctor';
   styleUrls: ['./record-result.component.css']
 })
 export class RecordResultComponent implements OnInit {
-  patientId;
-  currentDoctor;
-
-  visitToDoctor: VisitToDoctor = new VisitToDoctor();
+  currentVisit: Visit;
+  conclusion;
 
   constructor(private activatedRoute: ActivatedRoute,
               private doctorService: DoctorService,
@@ -20,23 +18,14 @@ export class RecordResultComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.doctorService.currentDoctorSubject.subscribe(value => {
-      this.currentDoctor = value;
+    this.doctorService.currentVisitSubject.subscribe(value => {
+      this.currentVisit = value;
     });
-    this.doctorService.patientOnReception.subscribe(value => {
-      this.patientId = value.id;
-    });
-
-    // this.activatedRoute.queryParams.subscribe(value => {
-    //   this.patientId = value.id;
-    //   console.log(this.patientId);
-    // });
   }
 
   record() {
-    this.doctorService.saveVisitToDoctor(this.visitToDoctor, this.currentDoctor.id, this.patientId).subscribe(value => {
+    this.doctorService.saveResultOfVisit(this.conclusion, this.currentVisit.id).subscribe(value => {
       console.log(value);
-      this.router.navigate(['doctor', 'reception', 'historyVisits']);
     });
   }
 }

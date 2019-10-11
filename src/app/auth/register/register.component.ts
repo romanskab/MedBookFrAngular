@@ -27,4 +27,8 @@ export class RegisterComponent implements OnInit {
   toFormLaboratory() {
     this.router.navigate(['/auth/register/laboratory']);
   }
+
+  exit() {
+    this.router.navigate(['auth', 'login']);
+  }
 }

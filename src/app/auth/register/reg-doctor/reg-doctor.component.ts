@@ -54,4 +54,6 @@ export class RegDoctorComponent implements OnInit {
   photoSelection(event) {
     this.filePhoto = event.target.files[0];
   }
+
+
 }

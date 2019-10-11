@@ -18,17 +18,17 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('token') != null) {
       this.userService.getCurrentRole().subscribe(value => {
         if (value === 'ROLE_PATIENT') {
-          this.router.navigate(['/patient']);
+          this.router.navigate(['patient']);
         }
         if (value === 'ROLE_DOCTOR') {
-          this.router.navigate(['/doctor']);
+          this.router.navigate(['doctor']);
         }
         if (value === 'ROLE_LABORATORY') {
-          this.router.navigate(['/laboratory']);
+          this.router.navigate(['laboratory']);
         }
       });
     } else {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['auth', 'login']);
     }
 
   }

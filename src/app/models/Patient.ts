@@ -1,7 +1,6 @@
 import {Role} from './Role';
 import {Gender} from './Gender';
 import {User} from './User';
-import {VisitToDoctor} from './VisitToDoctor';
 
 export class Patient extends User {
 

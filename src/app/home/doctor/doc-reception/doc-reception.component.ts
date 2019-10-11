@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
 import {DoctorService} from '../../../services/doctor.service';
-import {Patient} from '../../../models/Patient';
 import {Router} from '@angular/router';
-import {VisitToDoctor} from '../../../models/VisitToDoctor';
-import {CalendarOfVisits} from '../../../models/CalendarOfVisits';
+import {Visit} from '../../../models/Visit';
 
 @Component({
   selector: 'app-doc-reception',
@@ -12,31 +9,20 @@ import {CalendarOfVisits} from '../../../models/CalendarOfVisits';
   styleUrls: ['./doc-reception.component.css']
 })
 export class DocReceptionComponent implements OnInit {
-  visitsToday: CalendarOfVisits[];
-  patient: Patient;
+  visitsToday: Visit[];
+  visit: Visit;
 
   constructor(private doctorService: DoctorService,
               private router: Router) {
   }
 
   ngOnInit() {
-    if (this.patient != null) {
-      this.toHistoryVisits();
-    }
+    this.visit = null;
     this.doctorService.currentDoctorSubject.subscribe(doctor => {
-      this.doctorService.getTodayVisits(doctor.id).subscribe(value1 => {
-        console.log('записані на сьогодні:');
-        console.log(value1);
+      this.doctorService.getFutureTodayVisits(doctor.id).subscribe(value1 => {
         this.visitsToday = value1;
+        console.log(this.visitsToday);
       });
-    });
-  }
-
-  findPatient(form: NgForm) {
-    this.doctorService.findPatientByUsername(form.value.username).subscribe(value => {
-      this.patient = value;
-      this.doctorService.patientOnReception.next(value);
-      this.toHistoryVisits();
     });
   }
 
@@ -54,5 +40,10 @@ export class DocReceptionComponent implements OnInit {
 
   toRecordIndicators() {
     this.router.navigate(['doctor', 'reception', 'recordIndicators']);
+  }
+
+  saveCurrentVisit() {
+    this.doctorService.currentVisitSubject.next(this.visit);
+    this.toHistoryVisits();
   }
 }

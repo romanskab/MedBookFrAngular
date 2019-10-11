@@ -27,8 +27,8 @@
 <form *ngIf="doctor && !day">
   <mat-form-field>
     <mat-label>день</mat-label>
-    <mat-select [(ngModel)]="day" name="day" (selectionChange)="getFreeTimeToDoctor()">
-      <mat-option *ngFor="let d of days" [value]="d">{{d}}</mat-option>
+    <mat-select [(ngModel)]="day" name="day" (selectionChange)="getFreeVisitsInSelectedDay()">
+      <mat-option *ngFor="let d of freeDays" [value]="d">{{d}}</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
@@ -37,17 +37,17 @@
   {{day}}
 </div><br>
 
-<form *ngIf="day && !recordInCalendar">
+<form *ngIf="day && !selectedVisit">
   <mat-form-field>
     <mat-label>час</mat-label>
-    <mat-select [(ngModel)]="recordInCalendar" name="calendarId">
-      <mat-option *ngFor="let c of calendar" [value]="c">{{c.time}}</mat-option>
+    <mat-select [(ngModel)]="selectedVisit" name="calendarId">
+      <mat-option *ngFor="let visit of freeVisitsInSelectedDay" [value]="visit">{{visit.time}}</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
 </form>
-<div *ngIf="recordInCalendar">
-  {{recordInCalendar.time}}
+<div *ngIf="selectedVisit">
+  {{selectedVisit.time}}
 </div><br>
 
-<button mat-raised-button color="primary" (click)="saveRecordInCalendar()" *ngIf="recordInCalendar">Записатись</button>
+<button mat-raised-button color="primary" (click)="recordToDoctor()" *ngIf="selectedVisit">Записатись</button>

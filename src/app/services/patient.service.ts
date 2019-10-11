@@ -3,17 +3,18 @@ import {Patient} from '../models/Patient';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Doctor} from '../models/Doctor';
-import {CalendarOfVisits} from '../models/CalendarOfVisits';
-import {VisitToDoctor} from '../models/VisitToDoctor';
+import {Visit} from '../models/Visit';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
+  URLSavePatient = 'http://localhost:8080/save/patient';
+  URLGetCurrentPatient = 'http://localhost:8080/patient/current';
   URLGetDoctorsBySpeciality = 'http://localhost:8080/patient/doctors/spec';
-  URLGetFreeTimeToDoctor = 'http://localhost:8080/patient/freeTimeToDoctor';
-  URLSaveRecordInCalendar = 'http://localhost:8080/patient/saveRecordInCalendar';
-  URLGetLastVisitToDoctor = 'http://localhost:8080/patient/visitsToDoctor/last';
+  URLGetFreeVisitToDoctor = 'http://localhost:8080/patient/freeVisitToDoctor';
+  URLRecordToDoctor = 'http://localhost:8080/patient/recordToDoctor';
+  URLGetLastVisitToDoctor = 'http://localhost:8080/patient/visit/last';
 
   // @ts-ignore
   currentPatientSubject = new BehaviorSubject();
@@ -23,14 +24,14 @@ export class PatientService {
 
   save(patient: Patient) {
     console.log(patient);
-    return this.http.post<Patient>('http://localhost:8080/save/patient', patient);
+    return this.http.post<Patient>(this.URLSavePatient, patient);
   }
 
   getCurrentPatient() {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
-    return this.http.get<Patient>('http://localhost:8080/patient/current', {headers});
+    return this.http.get<Patient>(this.URLGetCurrentPatient, {headers});
   }
 
   getDoctorsBySpeciality(speciality): Observable<Doctor[]> {
@@ -41,28 +42,28 @@ export class PatientService {
     return this.http.get<Doctor[]>(URL, {headers});
   }
 
-  getFreeTimeToDoctor(doctorId): Observable<CalendarOfVisits[]> {
+  getFreeVisitToDoctor(doctorId): Observable<Visit[]> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
-    const URL = this.URLGetFreeTimeToDoctor + `/${doctorId}`;
-    return this.http.get<CalendarOfVisits[]>(URL, {headers});
+    const URL = this.URLGetFreeVisitToDoctor + `/${doctorId}`;
+    return this.http.get<Visit[]>(URL, {headers});
   }
 
-  saveRecordInCalendar(calendarId, patientId) {
+  recordToDoctor(visitId, patientId) {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
-    const URL = this.URLSaveRecordInCalendar + `/${calendarId}` + `/${patientId}`;
+    const URL = this.URLRecordToDoctor + `/${visitId}` + `/${patientId}`;
     return this.http.post(URL, null, {headers});
   }
 
-  getLastVisitToDoctor(patientId): Observable<VisitToDoctor> {
+  getLastVisitToDoctor(patientId): Observable<Visit> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
     const URL = this.URLGetLastVisitToDoctor + `/${patientId}`;
-    return this.http.get<VisitToDoctor>(URL, {headers});
+    return this.http.get<Visit>(URL, {headers});
   }
 
 }

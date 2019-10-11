@@ -39,18 +39,18 @@
   </form>
 </div>
 
-<table *ngIf="calendar">
+<table *ngIf="visits">
   <tr>
     <th>Дата</th>
     <th>Година</th>
     <th>Пацієнт</th>
   </tr>
-  <tr *ngFor="let position of calendar">
-    <td>{{position.date}}</td>
-    <td>{{position.time}}</td>
+  <tr *ngFor="let v of visits">
+    <td>{{v.date}}</td>
+    <td>{{v.time}}</td>
     <td>
-      <div *ngIf="position.patient">
-        {{position.patient.surname}} {{position.patient.name}}
+      <div *ngIf="v.patient">
+        {{v.patient.surname}} {{v.patient.name}}
       </div>
     </td>
   </tr>

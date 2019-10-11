@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorService} from '../../../../services/doctor.service';
-import {VisitToDoctor} from '../../../../models/VisitToDoctor';
-import {ActivatedRoute} from '@angular/router';
+import {Visit} from '../../../../models/Visit';
 
 @Component({
   selector: 'app-history-visits',
@@ -11,19 +10,18 @@ import {ActivatedRoute} from '@angular/router';
 export class HistoryVisitsComponent implements OnInit {
 
   patientId;
-  visitsToDoctors: VisitToDoctor[] = [];
+  visits: Visit[] = [];
 
-  constructor(private doctorService: DoctorService,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private doctorService: DoctorService) {
   }
 
   ngOnInit() {
-    this.doctorService.patientOnReception.subscribe(value => {
-      this.patientId = value.id;
+    this.doctorService.currentVisitSubject.subscribe(value => {
+      this.patientId = value.patient.id;
     });
-    this.doctorService.getVisitToDoctorByPatientId(this.patientId).subscribe(value => {
-      this.visitsToDoctors = value;
-      console.log(this.visitsToDoctors);
+    this.doctorService.getOldVisitsByPatientId(this.patientId).subscribe(value => {
+      this.visits = value;
+      console.log(this.visits);
     });
   }
 

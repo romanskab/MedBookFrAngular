@@ -9,3 +9,7 @@ p {
 div {
   text-align: center;
 }
+
+.button-exit{
+  text-align: right;
+}

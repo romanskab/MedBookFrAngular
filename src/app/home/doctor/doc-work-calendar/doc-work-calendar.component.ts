@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CalendarOfVisits} from '../../../models/CalendarOfVisits';
+import {Visit} from '../../../models/Visit';
 import {DoctorService} from '../../../services/doctor.service';
 
 @Component({
@@ -10,10 +10,11 @@ import {DoctorService} from '../../../services/doctor.service';
 export class DocWorkCalendarComponent implements OnInit {
   isButtonForCreate;
   isCreate;
+  visits: Visit[];
+
   date;
   times: string[] = [];
   doctorId;
-  calendar: CalendarOfVisits[];
 
   constructor(private doctorService: DoctorService) {
   }
@@ -23,9 +24,9 @@ export class DocWorkCalendarComponent implements OnInit {
     this.doctorService.currentDoctorSubject.subscribe(value => {
       console.log(value.id);
       this.doctorId = value.id;
-      this.doctorService.getCalendarByDoctorId(value.id).subscribe(value1 => {
+      this.doctorService.getVisitsByDoctorId(value.id).subscribe(value1 => {
         console.log(value1);
-        this.calendar = value1;
+        this.visits = value1;
       });
     });
   }

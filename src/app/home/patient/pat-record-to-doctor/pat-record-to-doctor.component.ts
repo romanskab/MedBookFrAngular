@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {DoctorService} from '../../../services/doctor.service';
 import {PatientService} from '../../../services/patient.service';
 import {Doctor} from '../../../models/Doctor';
-import {CalendarOfVisits} from '../../../models/CalendarOfVisits';
 import {Patient} from '../../../models/Patient';
+import {Visit} from '../../../models/Visit';
 
 @Component({
   selector: 'app-pat-record-to-doctor',
@@ -19,22 +19,24 @@ export class PatRecordToDoctorComponent implements OnInit {
   doctors: Doctor[];
   doctor: Doctor;
 
-  calendar: CalendarOfVisits[];
-  recordInCalendar: CalendarOfVisits;
+  freeVisits: Visit[];
 
-  days: Date[] = [];
+  freeDays: Date[] = [];
   day;
+
+  freeVisitsInSelectedDay: Visit[] = [];
+  selectedVisit: Visit;
 
   constructor(private doctorService: DoctorService,
               private patientService: PatientService) {
   }
 
   ngOnInit() {
-    this.doctorService.getSpecialities().subscribe(value => {
-      this.specialities = value;
-    });
     this.patientService.currentPatientSubject.subscribe(value => {
       this.currentPatient = value;
+      this.doctorService.getSpecialities().subscribe(value1 => {
+        this.specialities = value1;
+      });
     });
   }
 
@@ -45,30 +47,28 @@ export class PatRecordToDoctorComponent implements OnInit {
   }
 
   getFreeDaysToDoctor() {
-    this.patientService.getFreeTimeToDoctor(this.doctor.id).subscribe(value => {
-        this.calendar = value;
-        this.calendar.forEach(value1 => {
-          if (this.days.indexOf(value1.date) === -1) {
-            this.days.push(value1.date);
+    this.patientService.getFreeVisitToDoctor(this.doctor.id).subscribe(value => {
+        this.freeVisits = value;
+        this.freeVisits.forEach(value1 => {
+          if (this.freeDays.indexOf(value1.date) === -1) {
+            this.freeDays.push(value1.date);
           }
         });
+        console.log(this.freeDays);
       }
     );
   }
 
-  getFreeTimeToDoctor() {
-    const arr: CalendarOfVisits[] = [];
-    for (const calendarElement of this.calendar) {
-      if (calendarElement.date === this.day) {
-        arr.push(calendarElement);
+  getFreeVisitsInSelectedDay() {
+    for (const visit of this.freeVisits) {
+      if (visit.date === this.day) {
+        this.freeVisitsInSelectedDay.push(visit);
       }
     }
-    this.calendar = arr;
-    console.log(this.calendar);
   }
 
-  saveRecordInCalendar() {
-    this.patientService.saveRecordInCalendar(this.recordInCalendar.id, this.currentPatient.id).subscribe(value => {
+  recordToDoctor() {
+    this.patientService.recordToDoctor(this.selectedVisit.id, this.currentPatient.id).subscribe(value => {
       console.log(value);
     });
   }

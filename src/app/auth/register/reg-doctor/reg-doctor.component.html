@@ -60,7 +60,7 @@
   <mat-form-field>
     <mat-label>спеціальність</mat-label>
     <mat-select [(ngModel)]="doctor.speciality" name="speciality">
-      <mat-option *ngFor="let speciality of specialities" [value]="speciality">{{speciality}}</mat-option>
+      <mat-option *ngFor="let speciality of specialities" [value]="speciality">{{speciality | lowercase}}</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
@@ -103,4 +103,5 @@
           (click)="register()">Зареєструватись
   </button>
 </form>
+
 

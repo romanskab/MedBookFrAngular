@@ -1,41 +1,27 @@
-<div *ngIf="!patient">
-  <p style="margin-bottom: 0">Пошук по електронній пошті пацієнта:</p><br>
-  <form #form='ngForm'>
-    <mat-form-field>
-      <input matInput
-             type="email"
-             name="username"
-             placeholder="email"
-             required
-             ngModel>
-    </mat-form-field>
-    <button mat-stroked-button color="primary" [disabled]="!form.valid"
-            (click)="findPatient(form)">знайти
-    </button>
-  </form>
-
-  <p>Пошук серед записаних на сьогодні:</p>
+<div *ngIf="!visit">
+  <p>Вибрати пацієнта серед записаних на сьогодні:</p>
   <mat-form-field>
     <mat-label>пацієнти</mat-label>
-    <mat-select [(ngModel)]="patient" name="speciality">
-      <mat-option *ngFor="let v of visitsToday" [value]="v.patient">{{v.time}} {{v.patient.surname}} {{v.patient.name}}</mat-option>
+    <mat-select [(ngModel)]="visit" name="visit" (selectionChange)="saveCurrentVisit()">
+      <mat-option *ngFor="let v of visitsToday" [value]="v">
+        {{v.time}} {{v.patient.surname}} {{v.patient.name}}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 </div>
 
 
-<div *ngIf="patient">
-
+<div *ngIf="visit">
   <div class="wrapper-patient">
     <div class="left-div-patient">
-      <img [src]="'http://localhost:8080/images/' + patient.image" alt="image2">
+      <img [src]="'http://localhost:8080/images/' + visit.patient.image" alt="image2">
     </div>
 
     <div class="right-div-patient">
-      <h3>{{patient.surname}} {{patient.name}} {{patient.fatherName}}</h3>
-      <p>Дата народження: {{patient.dateOfBirth}}<br>
-        Телефон: {{patient.phone}}<br>
-        Ел.пошта: {{patient.username}}</p>
+      <h3>{{visit.patient.surname}} {{visit.patient.name}} {{visit.patient.fatherName}}</h3>
+      <p>Дата народження: {{visit.patient.dateOfBirth}}<br>
+        Телефон: {{visit.patient.phone}}<br>
+        Ел.пошта: {{visit.patient.username}}</p>
     </div>
     <div></div>
   </div>

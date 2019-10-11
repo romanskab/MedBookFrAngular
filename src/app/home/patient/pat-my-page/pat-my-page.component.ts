@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Patient} from '../../../models/Patient';
-import {PatientComponent} from '../patient.component';
 import {PatientService} from '../../../services/patient.service';
-import {VisitToDoctor} from '../../../models/VisitToDoctor';
+import {Visit} from '../../../models/Visit';
 
 @Component({
   selector: 'app-pat-my-page',
@@ -11,7 +10,7 @@ import {VisitToDoctor} from '../../../models/VisitToDoctor';
 })
 export class PatMyPageComponent implements OnInit {
   currentPatient: Patient;
-  lastVisit: VisitToDoctor;
+  lastVisit: Visit;
 
   constructor(
     private patientService: PatientService
@@ -22,9 +21,10 @@ export class PatMyPageComponent implements OnInit {
   ngOnInit() {
     this.patientService.getCurrentPatient().subscribe(value => {
       this.currentPatient = value;
-      this.patientService.getLastVisitToDoctor(this.currentPatient.id).subscribe(value1 => {
-        this.lastVisit = value1;
-      });
+      // this.patientService.getLastVisitToDoctor(this.currentPatient.id).subscribe(value1 => {
+      //   console.log(value1);
+      //   this.lastVisit = value1;
+      // });
 
     });
 

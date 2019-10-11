@@ -1,7 +1,6 @@
 import {Role} from './Role';
 import {Gender} from './Gender';
 import {User} from './User';
-import DateTimeFormat = Intl.DateTimeFormat;
 
 export class Doctor extends User {
 

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DoctorService} from '../../../services/doctor.service';
-import {Doctor} from '../../../models/Doctor';
-import {VisitToDoctor} from '../../../models/VisitToDoctor';
+import {Visit} from '../../../models/Visit';
 
 @Component({
   selector: 'app-doc-history-receptions',
@@ -9,7 +8,7 @@ import {VisitToDoctor} from '../../../models/VisitToDoctor';
   styleUrls: ['./doc-history-receptions.component.css']
 })
 export class DocHistoryReceptionsComponent implements OnInit {
-  visits: VisitToDoctor[] = [];
+  visits: Visit[];
 
   constructor(private doctorService: DoctorService) {
   }
@@ -21,7 +20,7 @@ export class DocHistoryReceptionsComponent implements OnInit {
   }
 
   getVisits(doctorId) {
-    this.doctorService.getVisitsByDoctorId(doctorId).subscribe(value => {
+    this.doctorService.getOldVisitsByDoctorId(doctorId).subscribe(value => {
       console.log(value);
       this.visits = value;
     });
