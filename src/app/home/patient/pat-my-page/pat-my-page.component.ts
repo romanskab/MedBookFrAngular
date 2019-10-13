@@ -21,10 +21,10 @@ export class PatMyPageComponent implements OnInit {
   ngOnInit() {
     this.patientService.getCurrentPatient().subscribe(value => {
       this.currentPatient = value;
-      // this.patientService.getLastVisitToDoctor(this.currentPatient.id).subscribe(value1 => {
-      //   console.log(value1);
-      //   this.lastVisit = value1;
-      // });
+      this.patientService.getLastVisitToDoctor(this.currentPatient.id).subscribe(value1 => {
+        console.log(value1);
+        this.lastVisit = value1;
+      });
 
     });
 

@@ -40,7 +40,7 @@ export class PatientComponent implements OnInit {
   }
 
   toHistoryInDoctor() {
-    this.router.navigate(['patient', 'historyInDoctor']);
+    this.router.navigate(['patient', 'historyVisits']);
     this.isLeftPanel = true;
   }
 

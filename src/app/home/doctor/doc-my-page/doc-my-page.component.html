@@ -15,8 +15,15 @@
   </div>
 
   <div class="bottom-div">
-    <p><b>Останній прийом пацієнта - </b></p>
-    <p><b>Наступний прийом пацієнта - </b></p>
+    <p *ngIf="lastVisit"><b>Останній прийом пацієнта - </b>{{lastVisit.date}}
+      {{lastVisit.time}}
+      {{lastVisit.patient.surname}}
+      {{lastVisit.patient.name}}</p>
+
+    <p *ngIf="nextVisit"><b>Наступний прийом пацієнта - </b>{{nextVisit.date}}
+      {{nextVisit.time}}
+      {{nextVisit.patient.surname}}
+      {{nextVisit.patient.name}}</p>
   </div>
 
 </div>

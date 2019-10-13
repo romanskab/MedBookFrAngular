@@ -19,7 +19,7 @@ export class HistoryVisitsComponent implements OnInit {
     this.doctorService.currentVisitSubject.subscribe(value => {
       this.patientId = value.patient.id;
     });
-    this.doctorService.getOldVisitsByPatientId(this.patientId).subscribe(value => {
+    this.doctorService.getFinishedVisitsByPatientId(this.patientId).subscribe(value => {
       this.visits = value;
       console.log(this.visits);
     });

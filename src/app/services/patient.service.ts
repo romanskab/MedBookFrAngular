@@ -9,12 +9,13 @@ import {Visit} from '../models/Visit';
   providedIn: 'root'
 })
 export class PatientService {
-  URLSavePatient = 'http://localhost:8080/save/patient';
-  URLGetCurrentPatient = 'http://localhost:8080/patient/current';
-  URLGetDoctorsBySpeciality = 'http://localhost:8080/patient/doctors/spec';
-  URLGetFreeVisitToDoctor = 'http://localhost:8080/patient/freeVisitToDoctor';
-  URLRecordToDoctor = 'http://localhost:8080/patient/recordToDoctor';
-  URLGetLastVisitToDoctor = 'http://localhost:8080/patient/visit/last';
+  private URLSavePatient = 'http://localhost:8080/save/patient';
+  private URLGetCurrentPatient = 'http://localhost:8080/patient/current';
+  private URLGetDoctorsBySpeciality = 'http://localhost:8080/patient/doctors/spec';
+  private URLGetFreeVisitToDoctor = 'http://localhost:8080/patient/freeVisitToDoctor';
+  private URLRecordToDoctor = 'http://localhost:8080/patient/recordToDoctor';
+  private URLGetLastVisitToDoctor = 'http://localhost:8080/patient/visit/last';
+  private URLGetAllFinishedVisits = 'http://localhost:8080/patient/visits/finished';
 
   // @ts-ignore
   currentPatientSubject = new BehaviorSubject();
@@ -64,6 +65,14 @@ export class PatientService {
     headers = headers.append('Authorization', token);
     const URL = this.URLGetLastVisitToDoctor + `/${patientId}`;
     return this.http.get<Visit>(URL, {headers});
+  }
+
+  getAllFinishedVisits(patientId): Observable<Visit[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetAllFinishedVisits + `/${patientId}`;
+    return this.http.get<Visit[]>(URL, {headers});
   }
 
 }

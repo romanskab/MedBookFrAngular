@@ -20,7 +20,7 @@ export class DocHistoryReceptionsComponent implements OnInit {
   }
 
   getVisits(doctorId) {
-    this.doctorService.getOldVisitsByDoctorId(doctorId).subscribe(value => {
+    this.doctorService.getFinishedVisitsByDoctorId(doctorId).subscribe(value => {
       console.log(value);
       this.visits = value;
     });

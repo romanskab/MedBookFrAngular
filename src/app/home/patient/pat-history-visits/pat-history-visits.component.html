@@ -1,12 +1,13 @@
-<table *ngIf="visits">
+<table>
   <tr>
     <th>Дата</th>
-    <th>Пацієнт</th>
+    <th>Лікар</th>
     <th>Результат огляду</th>
   </tr>
   <tr *ngFor="let visit of visits">
     <td>{{visit.date}}</td>
-    <td class="middle-td">{{visit.patient.surname}} {{visit.patient.name}}</td>
+    <td class="middle-td">
+      {{visit.doctor.surname}} {{visit.doctor.name}}</td>
     <td>{{visit.conclusion}}</td>
   </tr>
 </table>

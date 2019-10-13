@@ -24,7 +24,7 @@ export class DocWorkCalendarComponent implements OnInit {
     this.doctorService.currentDoctorSubject.subscribe(value => {
       console.log(value.id);
       this.doctorId = value.id;
-      this.doctorService.getVisitsByDoctorId(value.id).subscribe(value1 => {
+      this.doctorService.getFutureVisits(value.id).subscribe(value1 => {
         console.log(value1);
         this.visits = value1;
       });

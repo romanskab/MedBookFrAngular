@@ -15,11 +15,14 @@ export class DoctorService {
   private URLGetPatientByUsername = 'http://localhost:8080/doctor/getPatientByUsername';
   private URLSaveResultOfVisit = 'http://localhost:8080/doctor/saveResultOfVisit';
   private URLGetVisitsByPatientId = 'http://localhost:8080/doctor/visitsByPatientId';
-  private URLGetOldVisitsByPatientId = 'http://localhost:8080/doctor/oldVisitsByPatientId';
+  private URLGetFinishedVisitsByPatientId = 'http://localhost:8080/doctor/finishedVisitsByPatientId';
+  private URLGetFinishedVisitsByDoctorId = 'http://localhost:8080/doctor/finishedVisitsByDoctorId';
   private URLGetVisitsByDoctorId = 'http://localhost:8080/doctor/visitsByDoctorId';
-  private URLGetOldVisitsByDoctorId = 'http://localhost:8080/doctor/oldVisitsByDoctorId';
   private URLAddWorkTimes = 'http://localhost:8080/doctor/addWorkTimes';
   private URLGetFutureTodayVisits = 'http://localhost:8080/doctor/futureTodayVisits';
+  private URLGetFutureVisits = 'http://localhost:8080/doctor/futureVisits';
+  private URLGetNextVisit = 'http://localhost:8080/doctor/nextVisit';
+  private URLGetLastVisit = 'http://localhost:8080/doctor/lastVisit';
 
   // @ts-ignore
   currentDoctorSubject = new BehaviorSubject();
@@ -75,19 +78,19 @@ export class DoctorService {
     return this.http.get<Visit[]>(URL, {headers});
   }
 
-  getOldVisitsByDoctorId(id): Observable<Visit[]> {
+  getFinishedVisitsByDoctorId(id): Observable<Visit[]> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
-    const URL = this.URLGetOldVisitsByDoctorId + `/${id}`;
+    const URL = this.URLGetFinishedVisitsByDoctorId + `/${id}`;
     return this.http.get<Visit[]>(URL, {headers});
   }
 
-  getOldVisitsByPatientId(id): Observable<Visit[]> {
+  getFinishedVisitsByPatientId(id): Observable<Visit[]> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
-    const URL = this.URLGetOldVisitsByPatientId + `/${id}`;
+    const URL = this.URLGetFinishedVisitsByPatientId + `/${id}`;
     return this.http.get<Visit[]>(URL, {headers});
   }
 
@@ -105,6 +108,30 @@ export class DoctorService {
     headers = headers.append('Authorization', token);
     const URL = this.URLGetFutureTodayVisits + `/${doctorId}`;
     return this.http.get<Visit[]>(URL, {headers});
+  }
+
+  getFutureVisits(doctorId): Observable<Visit[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetFutureVisits + `/${doctorId}`;
+    return this.http.get<Visit[]>(URL, {headers});
+  }
+
+  getNextVisit(doctorId): Observable<Visit> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetNextVisit + `/${doctorId}`;
+    return this.http.get<Visit>(URL, {headers});
+  }
+
+  getLastVisit(doctorId): Observable<Visit> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetLastVisit + `/${doctorId}`;
+    return this.http.get<Visit>(URL, {headers});
   }
 
 }
