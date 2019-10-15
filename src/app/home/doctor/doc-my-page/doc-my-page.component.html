@@ -15,12 +15,12 @@
   </div>
 
   <div class="bottom-div">
-    <p *ngIf="lastVisit"><b>Останній прийом пацієнта - </b>{{lastVisit.date}}
+    <p *ngIf="lastVisit"><b>Останній прийом пацієнта - </b>{{lastVisit.date | date:"dd.MM.yyyy"}}р.
       {{lastVisit.time}}
       {{lastVisit.patient.surname}}
       {{lastVisit.patient.name}}</p>
 
-    <p *ngIf="nextVisit"><b>Наступний прийом пацієнта - </b>{{nextVisit.date}}
+    <p *ngIf="nextVisit"><b>Наступний прийом пацієнта - </b>{{nextVisit.date | date:"dd.MM.yyyy"}}р.
       {{nextVisit.time}}
       {{nextVisit.patient.surname}}
       {{nextVisit.patient.name}}</p>

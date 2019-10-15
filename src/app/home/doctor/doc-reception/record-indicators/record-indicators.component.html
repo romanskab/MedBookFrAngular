@@ -1,1 +1,20 @@
-<p>record-indicators works!</p>
+<form *ngIf="!test">
+  <mat-form-field>
+    <mat-label>показник</mat-label>
+    <mat-select [(ngModel)]="test" name="test">
+      <mat-option *ngFor="let t of testsTitles" [value]="t">{{t.title}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+</form>
+
+<div *ngIf="test">
+  {{test.title}}, {{test.unit}}
+
+<form #form='ngForm'>
+    <mat-form-field>
+      <input matInput type="number" name="result" [(ngModel)]="testResult.result">
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="saveResult()">зберегти</button>
+</form>
+</div><br>

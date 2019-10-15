@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Doctor} from '../models/Doctor';
 import {Visit} from '../models/Visit';
+import {TestResult} from '../models/TestResult';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class PatientService {
   private URLRecordToDoctor = 'http://localhost:8080/patient/recordToDoctor';
   private URLGetLastVisitToDoctor = 'http://localhost:8080/patient/visit/last';
   private URLGetAllFinishedVisits = 'http://localhost:8080/patient/visits/finished';
+
+  private URLGetLastTestResult = 'http://localhost:8080/patient/testResult/last';
+  private URLGetAllTestResults = 'http://localhost:8080/patient/testResults';
 
   // @ts-ignore
   currentPatientSubject = new BehaviorSubject();
@@ -73,6 +77,25 @@ export class PatientService {
     headers = headers.append('Authorization', token);
     const URL = this.URLGetAllFinishedVisits + `/${patientId}`;
     return this.http.get<Visit[]>(URL, {headers});
+  }
+
+//  -----------------------------------------------
+//                  АНАЛІЗИ
+//  -----------------------------------------------
+  getLastTestResult(patientId, title): Observable<TestResult> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetLastTestResult + `/${patientId}` + `/${title}`;
+    return this.http.get<TestResult>(URL, {headers});
+  }
+
+  getAllTestResults(patientId): Observable<TestResult[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetAllTestResults + `/${patientId}`;
+    return this.http.get<TestResult[]>(URL, {headers});
   }
 
 }

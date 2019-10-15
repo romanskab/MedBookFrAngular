@@ -4,6 +4,6 @@
   </div>
   <h4>{{currentPatient.surname}}<br> {{currentPatient.name}}<br> {{currentPatient.fatherName}}</h4>
   <p>{{currentPatient.phone}}</p>
-  <p>{{currentPatient.dateOfBirth}}</p>
+  <p>д/н: {{currentPatient.dateOfBirth | date:"dd.MM.yyyy"}}р.</p>
   <p>{{currentPatient.username}}</p>
 </div>

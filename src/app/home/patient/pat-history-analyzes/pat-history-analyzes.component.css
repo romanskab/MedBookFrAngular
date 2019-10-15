@@ -1,0 +1,12 @@
+th {
+  border: 1px solid deepskyblue;
+  background-color: deepskyblue;
+}
+
+td {
+  border: 1px solid deepskyblue;
+}
+
+.middle-td {
+  text-align: center;
+}

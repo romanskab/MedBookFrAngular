@@ -4,6 +4,8 @@ import {Doctor} from '../models/Doctor';
 import {Patient} from '../models/Patient';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Visit} from '../models/Visit';
+import {Test} from '../models/Test';
+import {TestResult} from '../models/TestResult';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,10 @@ export class DoctorService {
   private URLGetFutureVisits = 'http://localhost:8080/doctor/futureVisits';
   private URLGetNextVisit = 'http://localhost:8080/doctor/nextVisit';
   private URLGetLastVisit = 'http://localhost:8080/doctor/lastVisit';
+
+  private URLGetTestsTitles = 'http://localhost:8080/doctor/tests/titles';
+  private URLSaveTestResult = 'http://localhost:8080/doctor/test/save';
+  private URLGetTestResultsByPatientId = 'http://localhost:8080/doctor/testResults/patient';
 
   // @ts-ignore
   currentDoctorSubject = new BehaviorSubject();
@@ -132,6 +138,32 @@ export class DoctorService {
     headers = headers.append('Authorization', token);
     const URL = this.URLGetLastVisit + `/${doctorId}`;
     return this.http.get<Visit>(URL, {headers});
+  }
+
+//    --------------------------------------------
+//                     АНАЛІЗИ
+//    --------------------------------------------
+  getTestsTitles(): Observable<Test[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    return this.http.get<Test[]>(this.URLGetTestsTitles, {headers});
+  }
+
+  saveTestResult(result, testId, patientId, meterId) {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLSaveTestResult + `/${testId}` + `/${patientId}` + `/${meterId}`;
+    return this.http.post(URL, result, {headers});
+  }
+
+  getTestResults(patientId): Observable<TestResult[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetTestResultsByPatientId + `/${patientId}`;
+    return this.http.get<TestResult[]>(URL, {headers});
   }
 
 }

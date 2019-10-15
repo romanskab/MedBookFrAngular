@@ -19,7 +19,7 @@
 
     <div class="right-div-patient">
       <h3>{{visit.patient.surname}} {{visit.patient.name}} {{visit.patient.fatherName}}</h3>
-      <p>Дата народження: {{visit.patient.dateOfBirth}}<br>
+      <p>Дата народження: {{visit.patient.dateOfBirth | date:"dd.MM.yyyy"}}р.<br>
         Телефон: {{visit.patient.phone}}<br>
         Ел.пошта: {{visit.patient.username}}</p>
     </div>

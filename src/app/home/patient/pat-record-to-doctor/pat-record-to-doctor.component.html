@@ -28,7 +28,7 @@
   <mat-form-field>
     <mat-label>день</mat-label>
     <mat-select [(ngModel)]="day" name="day" (selectionChange)="getFreeVisitsInSelectedDay()">
-      <mat-option *ngFor="let d of freeDays" [value]="d">{{d}}</mat-option>
+      <mat-option *ngFor="let d of freeDays" [value]="d">{{d | date:"dd.MM.yyyy"}}</mat-option>
     </mat-select>
   </mat-form-field>
   <br>

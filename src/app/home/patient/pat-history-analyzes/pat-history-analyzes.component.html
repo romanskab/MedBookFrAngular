@@ -1,1 +1,14 @@
-<p>pat-history-analyzes works!</p>
+<table *ngIf="testResults">
+  <tr>
+    <th>Дата</th>
+    <th>Назва</th>
+    <th>Результат</th>
+    <th>Од.вим.</th>
+  </tr>
+  <tr *ngFor="let result of testResults">
+    <td>{{result.date | date:"dd.MM.yyyy"}}</td>
+    <td class="middle-td">{{result.test.title}}</td>
+    <td>{{result.result}}</td>
+    <td>{{result.test.unit}}</td>
+  </tr>
+</table>
