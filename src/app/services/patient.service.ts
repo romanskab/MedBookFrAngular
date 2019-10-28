@@ -20,6 +20,7 @@ export class PatientService {
 
   private URLGetLastTestResult = 'http://localhost:8080/patient/testResult/last';
   private URLGetAllTestResults = 'http://localhost:8080/patient/testResults';
+  private URLGetAllTestResultsByTitle = 'http://localhost:8080/patient/testResultsByTitle';
 
   // @ts-ignore
   currentPatientSubject = new BehaviorSubject();
@@ -95,6 +96,14 @@ export class PatientService {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
     const URL = this.URLGetAllTestResults + `/${patientId}`;
+    return this.http.get<TestResult[]>(URL, {headers});
+  }
+
+  getAllTestsByTitleAndPatient(patientId, title): Observable<TestResult[]> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetAllTestResultsByTitle + `/${patientId}` + `/${title}`;
     return this.http.get<TestResult[]>(URL, {headers});
   }
 

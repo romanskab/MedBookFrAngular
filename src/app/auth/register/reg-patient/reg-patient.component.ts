@@ -30,19 +30,23 @@ export class RegPatientComponent implements OnInit {
   register() {
     // спочатку зберігаємо юзера і даємо назву фото
     this.patient.role = Role.ROLE_PATIENT;
-    this.namePhoto = uuid();
-    const format = this.filePhoto.name.split('.').pop();
-    this.patient.image = this.namePhoto + '.' + format;
+    if (this.filePhoto != null) {
+      this.namePhoto = uuid();
+      const format = this.filePhoto.name.split('.').pop();
+      this.patient.image = this.namePhoto + '.' + format;
+    }
     console.log(this.patient);
     this.patientService.save(this.patient).subscribe(value => {
       console.log(value);
       // після збереження юзера зберігаємо файл фото в target/classes/static/images
-      const photoFormData: FormData = new FormData();
-      photoFormData.append('image', this.filePhoto, this.patient.image);
-      this.userService.savePhoto(photoFormData).subscribe(value1 => {
-        console.log(value1);
-        this.router.navigate(['']);
-      });
+      if (this.filePhoto != null) {
+        const photoFormData: FormData = new FormData();
+        photoFormData.append('image', this.filePhoto, this.patient.image);
+        this.userService.savePhoto(photoFormData).subscribe(value1 => {
+          console.log(value1);
+          this.router.navigate(['']);
+        });
+      }
     });
   }
 

@@ -24,6 +24,7 @@ export class PatMyPageComponent implements OnInit {
 
   ngOnInit() {
     this.patientService.getCurrentPatient().subscribe(value => {
+      console.log(value);
       this.currentPatient = value;
       this.patientService.getLastVisitToDoctor(this.currentPatient.id).subscribe(value1 => {
         console.log(value1);

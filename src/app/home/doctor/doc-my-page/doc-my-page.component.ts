@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Doctor} from '../../../models/Doctor';
-import {PatientService} from '../../../services/patient.service';
 import {DoctorService} from '../../../services/doctor.service';
 import {Visit} from '../../../models/Visit';
+import {Gender} from '../../../models/Gender';
 
 @Component({
   selector: 'app-doc-my-page',
@@ -14,6 +14,8 @@ export class DocMyPageComponent implements OnInit {
   lastVisit: Visit;
   nextVisit: Visit;
 
+  pathToImage;
+
   constructor(private doctorService: DoctorService) {
   }
 
@@ -21,6 +23,18 @@ export class DocMyPageComponent implements OnInit {
     this.doctorService.getCurrentDoctor().subscribe(value => {
       this.doctorService.currentDoctorSubject.next(value);
       this.currentDoctor = value;
+      console.log(this.currentDoctor);
+
+      if (this.currentDoctor.image === null) {
+        if (this.currentDoctor.gender === Gender.MALE) {
+          this.pathToImage = 'assets/images/photo_doctor_man.jpg';
+        }
+        if (this.currentDoctor.gender === Gender.FEMALE) {
+          this.pathToImage = 'assets/images/photo_doctor_woman.jpg';
+        }
+      } else {
+        this.pathToImage = 'http://localhost:8080/images/' + this.currentDoctor.image;
+      }
 
       this.doctorService.getNextVisit(this.currentDoctor.id).subscribe(value1 => {
         console.log(value1);

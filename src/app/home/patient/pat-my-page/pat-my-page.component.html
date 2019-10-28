@@ -17,7 +17,7 @@
   <div class="bottom-div">
     <p *ngIf="lastHeight"><b>Ріст - </b>{{lastHeight.result}} <small>({{lastHeight.date | date:"dd.MM.yyyy"}})</small></p>
     <p *ngIf="lastWeight"><b>Вага - </b>{{lastWeight.result}} <small>({{lastWeight.date | date:"dd.MM.yyyy"}})</small></p>
-    <p><b>Група крові - </b></p>
+    <p *ngIf="false"><b>Група крові - </b></p>
     <p *ngIf="lastVisit"><b>Останній візит до лікаря - </b>
       {{lastVisit.date | date:"dd.MM.yyyy"}}р.
       {{lastVisit.doctor.speciality | lowercase}}
