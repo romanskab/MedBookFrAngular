@@ -1,0 +1,27 @@
+.wrapper-patient {
+  display: flex;
+}
+
+.left-div-patient {
+  width: 20%;
+}
+
+.right-div-patient {
+  width: 80%;
+  padding-left: 10px;
+}
+
+img {
+  width: 100%;
+}
+
+.div-error {
+  color: red;
+  font-weight: bold;
+}
+
+.div-success {
+  color: green;
+  font-size: large;
+  font-weight: bold;
+}

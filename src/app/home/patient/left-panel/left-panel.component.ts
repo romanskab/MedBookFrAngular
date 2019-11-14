@@ -10,12 +10,20 @@ import {Patient} from '../../../models/Patient';
 export class LeftPanelComponent implements OnInit {
   currentPatient: Patient;
 
+  pathToImage;
+
   constructor(private patientService: PatientService) {
   }
 
   ngOnInit() {
     this.patientService.getCurrentPatient().subscribe(value => {
       this.currentPatient = value;
+
+      if (this.currentPatient.image === null) {
+        this.pathToImage = 'assets/images/photo_patient_default.jpg';
+      } else {
+        this.pathToImage = 'http://localhost:8080/images/' + this.currentPatient.image;
+      }
     });
   }
 

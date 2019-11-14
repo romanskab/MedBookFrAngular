@@ -10,6 +10,8 @@ import {LeftPanelComponent} from './left-panel/left-panel.component';
 import {PatRecordToDoctorComponent} from './pat-record-to-doctor/pat-record-to-doctor.component';
 import {PatHistoryVisitsComponent} from './pat-history-visits/pat-history-visits.component';
 import {PhaChartComponent} from './pat-history-analyzes/pha-chart/pha-chart.component';
+import {MatPaginatorModule} from '@angular/material';
+import { PatHistoryAnalyzesTableComponent } from './pat-history-analyzes/pat-history-analyzes-table/pat-history-analyzes-table.component';
 
 
 
@@ -18,11 +20,13 @@ import {PhaChartComponent} from './pat-history-analyzes/pha-chart/pha-chart.comp
     LeftPanelComponent,
     PatRecordToDoctorComponent,
     PatHistoryVisitsComponent,
-    PhaChartComponent],
+    PhaChartComponent,
+    PatHistoryAnalyzesTableComponent],
   imports: [
     CommonModule,
     PatientRoutingModule,
-    MaterialModule
+    MaterialModule,
+    MatPaginatorModule
   ]
 })
 export class PatientModule {

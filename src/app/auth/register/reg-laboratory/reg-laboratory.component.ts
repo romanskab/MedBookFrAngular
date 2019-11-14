@@ -17,6 +17,8 @@ export class RegLaboratoryComponent implements OnInit {
   passValid;
   filePhoto: File = null;
   namePhoto;
+  isError = false;
+  isSuccess = false;
 
   constructor(private laboratoryService: LaboratoryService,
               private router: Router,
@@ -28,21 +30,37 @@ export class RegLaboratoryComponent implements OnInit {
   }
 
   register() {
+    this.isError = false;
     this.laboratory.role = Role.ROLE_lABORATORY;
-    this.namePhoto = uuid();
-    const format = this.filePhoto.name.split('.').pop();
-    this.laboratory.image = this.namePhoto + '.' + format;
+    if (this.filePhoto != null) {
+      this.namePhoto = uuid();
+      const format = this.filePhoto.name.split('.').pop();
+      this.laboratory.image = this.namePhoto + '.' + format;
+    }
     console.log(this.laboratory);
     this.laboratoryService.save(this.laboratory).subscribe(value => {
       console.log(value);
       // після збереження юзера зберігаємо файл фото в target/classes/static/images
-      const photoFormData: FormData = new FormData();
-      photoFormData.append('image', this.filePhoto, this.laboratory.image);
-      this.userService.savePhoto(photoFormData).subscribe(value1 => {
-        console.log(value1);
-        this.router.navigate(['']);
-      });
+      if (this.filePhoto != null) {
+        const photoFormData: FormData = new FormData();
+        photoFormData.append('image', this.filePhoto, this.laboratory.image);
+        this.userService.savePhoto(photoFormData).subscribe(value1 => {
+          console.log(value1);
+          this.navigateToExitWithTimeout();
+        });
+      } else {
+        this.navigateToExitWithTimeout();
+      }
+    }, error1 => {
+      this.isError = true;
     });
+  }
+
+  navigateToExitWithTimeout() {
+    this.isSuccess = true;
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 2500);
   }
 
   photoSelection(event) {

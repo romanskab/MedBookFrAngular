@@ -16,7 +16,8 @@ export class RegPatientComponent implements OnInit {
   passValid;
   filePhoto: File = null;
   namePhoto;
-
+  isError = false;
+  isSuccess = false;
 
   constructor(private patientService: PatientService,
               private router: Router,
@@ -28,6 +29,7 @@ export class RegPatientComponent implements OnInit {
   }
 
   register() {
+    this.isError = false;
     // спочатку зберігаємо юзера і даємо назву фото
     this.patient.role = Role.ROLE_PATIENT;
     if (this.filePhoto != null) {
@@ -44,10 +46,21 @@ export class RegPatientComponent implements OnInit {
         photoFormData.append('image', this.filePhoto, this.patient.image);
         this.userService.savePhoto(photoFormData).subscribe(value1 => {
           console.log(value1);
-          this.router.navigate(['']);
+          this.navigateToExitWithTimeout();
         });
+      } else {
+        this.navigateToExitWithTimeout();
       }
+    }, error1 => {
+      this.isError = true;
     });
+  }
+
+  navigateToExitWithTimeout() {
+    this.isSuccess = true;
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 2500);
   }
 
   photoSelection(event) {

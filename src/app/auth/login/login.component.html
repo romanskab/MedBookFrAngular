@@ -13,4 +13,10 @@
   <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Увійти</button>
   <button mat-stroked-button color="primary" (click)="register()">Реєстрація</button>
 
-</form>
+</form><br>
+
+<div *ngIf="isError" class="div-error">
+  <b>
+    Логін або пароль невірні!!!
+  </b>
+</div>

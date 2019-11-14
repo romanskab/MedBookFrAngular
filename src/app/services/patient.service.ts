@@ -16,6 +16,7 @@ export class PatientService {
   private URLGetFreeVisitToDoctor = 'http://localhost:8080/patient/freeVisitToDoctor';
   private URLRecordToDoctor = 'http://localhost:8080/patient/recordToDoctor';
   private URLGetLastVisitToDoctor = 'http://localhost:8080/patient/visit/last';
+  private URLGetNextVisitToDoctor = 'http://localhost:8080/patient/visit/next';
   private URLGetAllFinishedVisits = 'http://localhost:8080/patient/visits/finished';
 
   private URLGetLastTestResult = 'http://localhost:8080/patient/testResult/last';
@@ -69,6 +70,14 @@ export class PatientService {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
     const URL = this.URLGetLastVisitToDoctor + `/${patientId}`;
+    return this.http.get<Visit>(URL, {headers});
+  }
+
+  getNextVisitToDoctor(patientId): Observable<Visit> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', token);
+    const URL = this.URLGetNextVisitToDoctor + `/${patientId}`;
     return this.http.get<Visit>(URL, {headers});
   }
 

@@ -26,6 +26,7 @@ export class RecordResultComponent implements OnInit {
   record() {
     this.doctorService.saveResultOfVisit(this.conclusion, this.currentVisit.id).subscribe(value => {
       console.log(value);
+      this.router.navigate(['doctor', 'reception', 'historyVisits']);
     });
   }
 }

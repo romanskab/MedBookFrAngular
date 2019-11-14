@@ -1,1 +1,84 @@
-<p>lab-record-results works!</p>
+<div *ngIf="!patient">
+  Введіть електронну пошту пацієнта:
+  <form #form='ngForm'>
+    <mat-form-field>
+      <input matInput
+             ngModel
+             type="email"
+             name="email"
+             placeholder="email"
+             required>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button
+            color="primary"
+            [disabled]="!form.valid"
+            (click)="find(form)">
+      Знайти
+    </button>
+  </form>
+</div>
+
+<div class="wrapper-patient" *ngIf="patient">
+  <div class="left-div-patient">
+    <img [src]="pathToImage" alt="image2">
+  </div>
+
+  <div class="right-div-patient">
+    <h3>{{patient.surname}} {{patient.name}} {{patient.fatherName}}</h3>
+    <p>Дата народження: {{patient.dateOfBirth | date:"dd.MM.yyyy"}}р.<br>
+      Телефон: {{patient.phone}}<br>
+      Ел.пошта: {{patient.username}}</p>
+  </div>
+</div>
+
+<div *ngIf="results.length && patient">
+  <div *ngFor="let res of results">
+      {{res.test.title}} - {{res.result}}{{res.test.unit}}
+  </div>
+  <br>
+  <button mat-raised-button
+          color="primary"
+          (click)="saveResult()">зберегти</button>
+  <br>
+
+  <div *ngIf="isError" class="div-error">
+    Результати не збережено!!!<br>
+    Спробуйте повторити!!!
+  </div>
+
+  <div *ngIf="isSuccess" class="div-success">
+    Результати аналізів збережено!
+  </div>
+</div><br>
+
+
+
+<div *ngIf="testsTitles.length">
+  <form *ngIf="patient">
+    <mat-form-field>
+      <mat-label>показник</mat-label>
+      <mat-select [(ngModel)]="test" name="test">
+        <mat-option *ngFor="let t of testsTitles" [value]="t">{{t.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+  </form>
+
+  <div *ngIf="test">
+    <form #formResult='ngForm'>
+      <mat-form-field>
+        <input matInput type="number"
+               name="result"
+               placeholder="{{test.unit}}"
+               ngModel
+               required>
+      </mat-form-field>
+      <button mat-raised-button
+              color="primary"
+              [disabled]="formResult.invalid"
+              (click)="addResult(formResult)">додати</button>
+    </form>
+  </div>
+
+</div>

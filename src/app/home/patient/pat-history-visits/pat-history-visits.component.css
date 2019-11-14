@@ -1,12 +1,7 @@
-th {
-  border: 1px solid deepskyblue;
-  background-color: deepskyblue;
+table {
+  width: 100%;
 }
 
-td {
-  border: 1px solid deepskyblue;
-}
-
-.middle-td {
-  text-align: center;
+td.mat-cell, th.mat-header-cell {
+  padding-left: 4px;
 }

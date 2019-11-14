@@ -1,0 +1,14 @@
+.wrapper{
+  text-align: center;
+}
+
+.div-error {
+  color: red;
+  font-weight: bold;
+}
+
+.div-success {
+  color: green;
+  font-size: large;
+  font-weight: bold;
+}

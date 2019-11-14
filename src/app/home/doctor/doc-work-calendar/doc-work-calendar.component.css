@@ -29,11 +29,6 @@ select {
   text-align: right;
 }
 
-th {
-  border: 1px solid deepskyblue;
-  background-color: deepskyblue;
-}
-
-td {
-  border: 1px solid deepskyblue;
+table {
+  width: 100%;
 }

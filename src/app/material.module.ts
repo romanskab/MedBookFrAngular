@@ -4,10 +4,12 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatCheckboxModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatIconModule,
   MatInputModule,
   MatNativeDateModule,
-  MatRadioModule, MatSelectModule
+  MatRadioModule,
+  MatSelectModule, MatSortModule,
+  MatTableModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
@@ -25,7 +27,10 @@ import {FormsModule} from '@angular/forms';
     MatRadioModule,
     MatButtonToggleModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatIconModule
   ],
   exports: [
     MatButtonModule,
@@ -36,7 +41,10 @@ import {FormsModule} from '@angular/forms';
     MatRadioModule,
     MatButtonToggleModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatIconModule
   ]
 })
 export class MaterialModule {

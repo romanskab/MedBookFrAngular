@@ -4,6 +4,7 @@ import {PatientService} from '../../../services/patient.service';
 import {Doctor} from '../../../models/Doctor';
 import {Patient} from '../../../models/Patient';
 import {Visit} from '../../../models/Visit';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-pat-record-to-doctor',
@@ -27,8 +28,12 @@ export class PatRecordToDoctorComponent implements OnInit {
   freeVisitsInSelectedDay: Visit[] = [];
   selectedVisit: Visit;
 
+  isError = false;
+  isSuccess = false;
+
   constructor(private doctorService: DoctorService,
-              private patientService: PatientService) {
+              private patientService: PatientService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -68,8 +73,20 @@ export class PatRecordToDoctorComponent implements OnInit {
   }
 
   recordToDoctor() {
+    this.isError = false;
     this.patientService.recordToDoctor(this.selectedVisit.id, this.currentPatient.id).subscribe(value => {
       console.log(value);
+      this.navigateToExitWithTimeout();
+    }, error1 => {
+      this.isError = true;
     });
   }
+
+  navigateToExitWithTimeout() {
+    this.isSuccess = true;
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 2500);
+  }
+
 }

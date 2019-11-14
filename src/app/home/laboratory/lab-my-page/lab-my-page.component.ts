@@ -16,6 +16,7 @@ export class LabMyPageComponent implements OnInit {
   ngOnInit() {
     this.laboratoryService.getCurrentLaboratory().subscribe(value => {
       this.currentLaboratory = value;
+      this.laboratoryService.currentLaboratorySubject.next(value);
     });
   }
 

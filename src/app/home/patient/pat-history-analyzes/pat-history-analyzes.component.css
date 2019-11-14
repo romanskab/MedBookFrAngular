@@ -1,12 +1,16 @@
-th {
-  border: 1px solid deepskyblue;
-  background-color: deepskyblue;
-}
+/*th {*/
+/*  border: 1px solid deepskyblue;*/
+/*  background-color: deepskyblue;*/
+/*}*/
 
-td {
-  border: 1px solid deepskyblue;
-}
+/*td {*/
+/*  border: 1px solid deepskyblue;*/
+/*}*/
 
-.middle-td {
-  text-align: center;
+/*.middle-td {*/
+/*  text-align: center;*/
+/*}*/
+
+table {
+  width: 100%;
 }

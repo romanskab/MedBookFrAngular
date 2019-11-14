@@ -19,6 +19,8 @@ export class RegDoctorComponent implements OnInit {
   filePhoto: File = null;
   namePhoto;
   specialities: string[];
+  isError = false;
+  isSuccess = false;
 
   constructor(private doctorService: DoctorService,
               private router: Router,
@@ -34,8 +36,9 @@ export class RegDoctorComponent implements OnInit {
   }
 
   register() {
+    this.isError = false;
     // коригування формату дати
-    this.doctor.dateOfBirth = moment(this.doctor.dateOfBirth).format('YYYY-MM-DDT00:00:00.000') + 'Z';
+    // this.doctor.dateOfBirth = moment(this.doctor.dateOfBirth).format('YYYY-MM-DDT00:00:00.000') + 'Z';
     // спочатку зберігаємо юзера і даємо назву фото
     this.doctor.role = Role.ROLE_DOCTOR;
     if (this.filePhoto != null) {
@@ -52,10 +55,21 @@ export class RegDoctorComponent implements OnInit {
         photoFormData.append('image', this.filePhoto, this.doctor.image);
         this.userService.savePhoto(photoFormData).subscribe(value1 => {
           console.log(value1);
-          this.router.navigate(['']);
+          this.navigateToExitWithTimeout();
         });
+      } else {
+        this.navigateToExitWithTimeout();
       }
+    }, error1 => {
+      this.isError = true;
     });
+  }
+
+  navigateToExitWithTimeout() {
+    this.isSuccess = true;
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 2500);
   }
 
   photoSelection(event) {

@@ -49,7 +49,7 @@ export class PhaChartComponent implements OnInit {
   showChart() {
     let ctx;
     ctx = document.getElementById('myChart');
-    ctx = ctx.getContext('2d');
+    // ctx = ctx.getContext('2d');
 
     this.myChart = new Chart(ctx, {
       type: 'bar',

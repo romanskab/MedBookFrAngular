@@ -103,4 +103,13 @@
           (click)="register()"
   >Зареєструватись
   </button>
-</form>
+</form><br>
+
+<div *ngIf="isError" class="div-error">
+    Пацієнта не зареєстровано!!!<br>
+    Пацієнт з такою електронною поштою вже існує!!!
+</div>
+
+<div *ngIf="isSuccess" class="div-success">
+  Реєстрація успішна!
+</div>

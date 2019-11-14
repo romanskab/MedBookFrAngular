@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   color: ThemePalette;
 
   userLog: Login = new Login();
+  isError = false;
 
   constructor(private loginService: LoginService,
               private router: Router) {
@@ -23,9 +24,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.isError = false;
     this.loginService.login(this.userLog).subscribe(value => {
       localStorage.setItem('token', value.headers.get('Authorization'));
       this.router.navigate(['']);
+    }, error1 => {
+      this.isError = true;
     });
   }
 

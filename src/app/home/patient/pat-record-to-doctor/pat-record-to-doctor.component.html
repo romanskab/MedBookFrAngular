@@ -1,3 +1,5 @@
+<div class="wrapper">
+
 <form *ngIf="!speciality">
   <mat-form-field>
     <mat-label>спеціальність</mat-label>
@@ -50,4 +52,15 @@
   {{selectedVisit.time}}
 </div><br>
 
-<button mat-raised-button color="primary" (click)="recordToDoctor()" *ngIf="selectedVisit">Записатись</button>
+<button mat-raised-button color="primary" (click)="recordToDoctor()" *ngIf="selectedVisit">Записатись</button><br>
+
+<div *ngIf="isError" class="div-error">
+  Запис на прийом не зроблено!!!<br>
+  Спробуйте повторити!!!
+</div>
+
+<div *ngIf="isSuccess" class="div-success">
+  Запис на прийом успішний!
+</div>
+
+</div>

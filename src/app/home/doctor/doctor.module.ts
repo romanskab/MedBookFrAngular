@@ -14,7 +14,7 @@ import { HistoryVisitsComponent } from './doc-reception/history-visits/history-v
 import { HistoryAnalyzesComponent } from './doc-reception/history-analyzes/history-analyzes.component';
 import { RecordResultComponent } from './doc-reception/record-result/record-result.component';
 import { RecordIndicatorsComponent } from './doc-reception/record-indicators/record-indicators.component';
-import {MatListModule} from '@angular/material';
+import {MatListModule, MatPaginatorModule} from '@angular/material';
 
 
 @NgModule({
@@ -29,7 +29,8 @@ import {MatListModule} from '@angular/material';
     DoctorRoutingModule,
     MaterialModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    MatPaginatorModule
   ]
 })
 export class DoctorModule {

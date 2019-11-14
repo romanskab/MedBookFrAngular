@@ -1,18 +1,3 @@
-<!--<table *ngIf="testResults">-->
-<!--  <tr>-->
-<!--    <th>Дата</th>-->
-<!--    <th>Назва</th>-->
-<!--    <th>Результат</th>-->
-<!--    <th>Од.вим.</th>-->
-<!--  </tr>-->
-<!--  <tr *ngFor="let result of testResults">-->
-<!--    <td>{{result.date | date:"dd.MM.yyyy"}}</td>-->
-<!--    <td class="middle-td">{{result.test.title}}</td>-->
-<!--    <td>{{result.result}}</td>-->
-<!--    <td>{{result.test.unit}}</td>-->
-<!--  </tr>-->
-<!--</table>-->
-
 <div class="mat-elevation-z8">
 
   <mat-form-field>
@@ -36,11 +21,11 @@
       <td mat-cell *matCellDef="let element"> {{element.result}} {{element.unit}}</td>
     </ng-container>
 
-<!--    <ng-container matColumnDef="unit">-->
-<!--      <th mat-header-cell *matHeaderCellDef></th>-->
-<!--      <td mat-cell *matCellDef="let element" [routerLink]="element.name">-->
-<!--        <mat-icon aria-hidden="false">insert_chart_outlined</mat-icon></td>-->
-<!--    </ng-container>-->
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" [routerLink]="element.name">
+        <mat-icon aria-hidden="false">insert_chart_outlined</mat-icon></td>
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

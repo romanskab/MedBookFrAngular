@@ -2,7 +2,7 @@
 
   <div class="top-div" *ngIf="currentPatient">
     <div class="left-top-div">
-      <img [src]="'http://localhost:8080/images/' + currentPatient.image" alt="image2">
+      <img [src]="pathToImage" alt="image2">
     </div>
 
     <div class="right-top-div">
@@ -24,6 +24,13 @@
       {{lastVisit.doctor.surname}}
       {{lastVisit.doctor.name | slice:0:1}}.
       {{lastVisit.doctor.fatherName | slice:0:1}}.</p>
+    <p *ngIf="nextVisit"><b>Наступний запланований візит до лікаря - </b>
+      {{nextVisit.date | date:"dd.MM.yyyy"}}р.
+      {{nextVisit.time}}
+      {{nextVisit.doctor.speciality | lowercase}}
+      {{nextVisit.doctor.surname}}
+      {{nextVisit.doctor.name | slice:0:1}}.
+      {{nextVisit.doctor.fatherName | slice:0:1}}.</p>
   </div>
 
 </div>

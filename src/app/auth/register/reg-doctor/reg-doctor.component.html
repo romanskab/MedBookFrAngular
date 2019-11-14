@@ -109,6 +109,14 @@
   <button mat-raised-button color="primary" [disabled]="!(form.valid && doctor.password==passValid)"
           (click)="register()">Зареєструватись
   </button>
-</form>
+</form><br>
 
 
+<div *ngIf="isError" class="div-error">
+    Лікаря не зареєстровано!!!<br>
+    Лікар з такою електронною поштою вже існує!!!
+</div>
+
+<div *ngIf="isSuccess" class="div-success">
+  Реєстрація успішна!
+</div>

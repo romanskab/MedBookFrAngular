@@ -1,12 +1,33 @@
-<table *ngIf="visits">
-  <tr>
-    <th>Дата</th>
-    <th>Пацієнт</th>
-    <th>Результат огляду</th>
-  </tr>
-  <tr *ngFor="let visit of visits">
-    <td>{{visit.date}}</td>
-    <td class="middle-td">{{visit.patient.surname}} {{visit.patient.name}}</td>
-    <td>{{visit.conclusion}}</td>
-  </tr>
-</table>
+<div *ngIf="visits.length" class="mat-elevation-z8">
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <table mat-table matSort [dataSource]="dataSource">
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> дата </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date:"dd.MM.yyyy"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="patient">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> пацієнт </th>
+      <td mat-cell *matCellDef="let element"> {{element.surname}} {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="conclusion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> заключення </th>
+      <td mat-cell *matCellDef="let element"> {{element.conclusion}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div *ngIf="!visits.length">
+  Історія прийомів в базі даних відсутня!!!
+</div>

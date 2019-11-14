@@ -5,6 +5,7 @@ import {Doctor} from '../../../../models/Doctor';
 import {Patient} from '../../../../models/Patient';
 import {TestResult} from '../../../../models/TestResult';
 import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-record-indicators',
@@ -20,7 +21,8 @@ export class RecordIndicatorsComponent implements OnInit {
 
   testResult: TestResult = new TestResult();
 
-  constructor(private doctorService: DoctorService) {
+  constructor(private doctorService: DoctorService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class RecordIndicatorsComponent implements OnInit {
     this.doctorService.saveTestResult(this.testResult.result, this.test.id, this.currentPatient.id, this.currentDoctor.id)
       .subscribe(value => {
         console.log(value);
+        this.router.navigate(['doctor', 'reception', 'historyAnalyzes']);
       });
   }
 }
