@@ -60,7 +60,7 @@ export class RegPatientComponent implements OnInit {
     this.isSuccess = true;
     setTimeout(() => {
       this.router.navigate(['']);
-    }, 2500);
+    }, 2000);
   }
 
   photoSelection(event) {

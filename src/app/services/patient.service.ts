@@ -5,29 +5,35 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Doctor} from '../models/Doctor';
 import {Visit} from '../models/Visit';
 import {TestResult} from '../models/TestResult';
+import {ConfigService} from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
-  private URLSavePatient = 'http://localhost:8080/save/patient';
-  private URLGetCurrentPatient = 'http://localhost:8080/patient/current';
-  private URLGetDoctorsBySpeciality = 'http://localhost:8080/patient/doctors/spec';
-  private URLGetFreeVisitToDoctor = 'http://localhost:8080/patient/freeVisitToDoctor';
-  private URLRecordToDoctor = 'http://localhost:8080/patient/recordToDoctor';
-  private URLGetLastVisitToDoctor = 'http://localhost:8080/patient/visit/last';
-  private URLGetNextVisitToDoctor = 'http://localhost:8080/patient/visit/next';
-  private URLGetAllFinishedVisits = 'http://localhost:8080/patient/visits/finished';
 
-  private URLGetLastTestResult = 'http://localhost:8080/patient/testResult/last';
-  private URLGetAllTestResults = 'http://localhost:8080/patient/testResults';
-  private URLGetAllTestResultsByTitle = 'http://localhost:8080/patient/testResultsByTitle';
+  constructor(private http: HttpClient,
+              private config: ConfigService) {
+  }
+
+  private baseURL = this.config.api;
+  private patientURL = this.config.api + '/patient';
+
+  private URLSavePatient = `${this.baseURL}/save/patient`;
+  private URLGetCurrentPatient = `${this.patientURL}/current`;
+  private URLGetDoctorsBySpeciality = `${this.patientURL}/doctors/spec`;
+  private URLGetFreeVisitToDoctor = `${this.patientURL}/freeVisitToDoctor`;
+  private URLRecordToDoctor = `${this.patientURL}/recordToDoctor`;
+  private URLGetLastVisitToDoctor = `${this.patientURL}/visit/last`;
+  private URLGetNextVisitToDoctor = `${this.patientURL}/visit/next`;
+  private URLGetAllFinishedVisits = `${this.patientURL}/visits/finished`;
+
+  private URLGetLastTestResult = `${this.patientURL}/testResult/last`;
+  private URLGetAllTestResults = `${this.patientURL}/testResults`;
+  private URLGetAllTestResultsByTitle = `${this.patientURL}/testResultsByTitle`;
 
   // @ts-ignore
   currentPatientSubject = new BehaviorSubject();
-
-  constructor(private http: HttpClient) {
-  }
 
   save(patient: Patient) {
     console.log(patient);

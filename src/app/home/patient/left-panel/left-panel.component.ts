@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientService} from '../../../services/patient.service';
 import {Patient} from '../../../models/Patient';
+import {ConfigService} from '../../../services/config.service';
 
 @Component({
   selector: 'app-left-panel',
@@ -12,7 +13,8 @@ export class LeftPanelComponent implements OnInit {
 
   pathToImage;
 
-  constructor(private patientService: PatientService) {
+  constructor(private patientService: PatientService,
+              private configService: ConfigService) {
   }
 
   ngOnInit() {
@@ -22,7 +24,7 @@ export class LeftPanelComponent implements OnInit {
       if (this.currentPatient.image === null) {
         this.pathToImage = 'assets/images/photo_patient_default.jpg';
       } else {
-        this.pathToImage = 'http://localhost:8080/images/' + this.currentPatient.image;
+        this.pathToImage = this.configService.api + '/images/' + this.currentPatient.image;
       }
     });
   }

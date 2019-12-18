@@ -3,6 +3,7 @@ import {Patient} from '../../../models/Patient';
 import {PatientService} from '../../../services/patient.service';
 import {Visit} from '../../../models/Visit';
 import {TestResult} from '../../../models/TestResult';
+import {ConfigService} from '../../../services/config.service';
 
 @Component({
   selector: 'app-pat-my-page',
@@ -20,7 +21,8 @@ export class PatMyPageComponent implements OnInit {
   pathToImage;
 
   constructor(
-    private patientService: PatientService
+    private patientService: PatientService,
+    private configService: ConfigService
   ) {
 
   }
@@ -33,7 +35,7 @@ export class PatMyPageComponent implements OnInit {
       if (this.currentPatient.image === null) {
         this.pathToImage = 'assets/images/photo_patient_default.jpg';
       } else {
-        this.pathToImage = 'http://localhost:8080/images/' + this.currentPatient.image;
+        this.pathToImage = this.configService.api + '/images/' + this.currentPatient.image;
       }
 
       this.patientService.getLastVisitToDoctor(this.currentPatient.id).subscribe(value1 => {

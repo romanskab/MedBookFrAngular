@@ -1,27 +1,30 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Doctor} from '../models/Doctor';
 import {Laboratory} from '../models/Laboratory';
-import {Patient} from '../models/Patient';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Test} from '../models/Test';
+import {ConfigService} from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LaboratoryService {
-  private URLCurrent = 'http://localhost:8080/laboratory/current';
-  private URLSave = 'http://localhost:8080/save/laboratory';
-  private URLGetPatientByUsername = 'http://localhost:8080/laboratory/getPatientByUsername';
 
-  private URLGetTestsTitles = 'http://localhost:8080/laboratory/tests/titles';
-  private URLSaveTestResult = 'http://localhost:8080/laboratory/test/save';
+  constructor(private http: HttpClient,
+              private config: ConfigService) {
+  }
+
+  private baseURL = this.config.api;
+  private laboratoryURL = this.config.api + '/laboratory';
+
+  private URLSave = `${this.baseURL}/save/laboratory`;
+  private URLCurrent = `${this.laboratoryURL}/current`;
+  private URLGetPatientByUsername = `${this.laboratoryURL}/getPatientByUsername`;
+  private URLGetTestsTitles = `${this.laboratoryURL}/tests/titles`;
+  private URLSaveTestResult = `${this.laboratoryURL}/test/save`;
 
   // @ts-ignore
   currentLaboratorySubject = new BehaviorSubject();
-
-  constructor(private http: HttpClient) {
-  }
 
   save(laboratory: Laboratory) {
     return this.http.post<Laboratory>(this.URLSave, laboratory);

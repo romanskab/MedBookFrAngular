@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Doctor} from '../../../models/Doctor';
 import {DoctorService} from '../../../services/doctor.service';
 import {Gender} from '../../../models/Gender';
+import {ConfigService} from '../../../services/config.service';
 
 @Component({
   selector: 'app-doc-left-panel',
@@ -13,7 +14,8 @@ export class DocLeftPanelComponent implements OnInit {
 
   pathToImage;
 
-  constructor(private doctorService: DoctorService) {
+  constructor(private doctorService: DoctorService,
+              private configService: ConfigService) {
   }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class DocLeftPanelComponent implements OnInit {
           this.pathToImage = 'assets/images/photo_doctor_woman.jpg';
         }
       } else {
-        this.pathToImage = 'http://localhost:8080/images/' + this.currentDoctor.image;
+        this.pathToImage = this.configService.api + '/images/' + this.currentDoctor.image;
       }
     });
   }

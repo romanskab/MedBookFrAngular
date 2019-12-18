@@ -6,37 +6,43 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Visit} from '../models/Visit';
 import {Test} from '../models/Test';
 import {TestResult} from '../models/TestResult';
+import {ConfigService} from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
-  private URLGetSpecialities = 'http://localhost:8080/specialities';
-  private URLSaveDoctor = 'http://localhost:8080/save/doctor';
-  private URLCurrent = 'http://localhost:8080/doctor/current';
-  private URLGetPatientByUsername = 'http://localhost:8080/doctor/getPatientByUsername';
-  private URLSaveResultOfVisit = 'http://localhost:8080/doctor/saveResultOfVisit';
-  private URLGetVisitsByPatientId = 'http://localhost:8080/doctor/visitsByPatientId';
-  private URLGetFinishedVisitsByPatientId = 'http://localhost:8080/doctor/finishedVisitsByPatientId';
-  private URLGetFinishedVisitsByDoctorId = 'http://localhost:8080/doctor/finishedVisitsByDoctorId';
-  private URLGetVisitsByDoctorId = 'http://localhost:8080/doctor/visitsByDoctorId';
-  private URLAddWorkTimes = 'http://localhost:8080/doctor/addWorkTimes';
-  private URLGetFutureTodayVisits = 'http://localhost:8080/doctor/futureTodayVisits';
-  private URLGetFutureVisits = 'http://localhost:8080/doctor/futureVisits';
-  private URLGetNextVisit = 'http://localhost:8080/doctor/nextVisit';
-  private URLGetLastVisit = 'http://localhost:8080/doctor/lastVisit';
 
-  private URLGetTestsTitles = 'http://localhost:8080/doctor/tests/titles';
-  private URLSaveTestResult = 'http://localhost:8080/doctor/test/save';
-  private URLGetTestResultsByPatientId = 'http://localhost:8080/doctor/testResults/patient';
+  constructor(private http: HttpClient,
+              private config: ConfigService) {
+  }
+
+  private baseURL = this.config.api;
+  private doctorURL = this.config.api + '/doctor';
+
+  private URLGetSpecialities = `${this.baseURL}/specialities`;
+  private URLSaveDoctor = `${this.baseURL}/save/doctor`;
+  private URLCurrent = `${this.doctorURL}/current`;
+  private URLGetPatientByUsername = `${this.doctorURL}/getPatientByUsername`;
+  private URLSaveResultOfVisit = `${this.doctorURL}/saveResultOfVisit`;
+  private URLGetVisitsByPatientId = `${this.doctorURL}/visitsByPatientId`;
+  private URLGetFinishedVisitsByPatientId = `${this.doctorURL}/finishedVisitsByPatientId`;
+  private URLGetFinishedVisitsByDoctorId = `${this.doctorURL}/finishedVisitsByDoctorId`;
+  private URLGetVisitsByDoctorId = `${this.doctorURL}/visitsByDoctorId`;
+  private URLAddWorkTimes = `${this.doctorURL}/addWorkTimes`;
+  private URLGetFutureTodayVisits = `${this.doctorURL}/futureTodayVisits`;
+  private URLGetFutureVisits = `${this.doctorURL}/futureVisits`;
+  private URLGetNextVisit = `${this.doctorURL}/nextVisit`;
+  private URLGetLastVisit = `${this.doctorURL}/lastVisit`;
+
+  private URLGetTestsTitles = `${this.doctorURL}/tests/titles`;
+  private URLSaveTestResult = `${this.doctorURL}/test/save`;
+  private URLGetTestResultsByPatientId = `${this.doctorURL}/testResults/patient`;
 
   // @ts-ignore
   currentDoctorSubject = new BehaviorSubject();
   // @ts-ignore
   currentVisitSubject = new BehaviorSubject();
-
-  constructor(private http: HttpClient) {
-  }
 
   getSpecialities(): Observable<string[]> {
     return this.http.get<string[]>(this.URLGetSpecialities, {observe: 'body'});

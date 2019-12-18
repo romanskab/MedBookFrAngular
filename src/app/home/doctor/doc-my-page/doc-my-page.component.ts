@@ -3,6 +3,7 @@ import {Doctor} from '../../../models/Doctor';
 import {DoctorService} from '../../../services/doctor.service';
 import {Visit} from '../../../models/Visit';
 import {Gender} from '../../../models/Gender';
+import {ConfigService} from '../../../services/config.service';
 
 @Component({
   selector: 'app-doc-my-page',
@@ -16,7 +17,8 @@ export class DocMyPageComponent implements OnInit {
 
   pathToImage;
 
-  constructor(private doctorService: DoctorService) {
+  constructor(private doctorService: DoctorService,
+              private configService: ConfigService) {
   }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class DocMyPageComponent implements OnInit {
           this.pathToImage = 'assets/images/photo_doctor_woman.jpg';
         }
       } else {
-        this.pathToImage = 'http://localhost:8080/images/' + this.currentDoctor.image;
+        this.pathToImage = this.configService.api + '/images/' + this.currentDoctor.image;
       }
 
       this.doctorService.getNextVisit(this.currentDoctor.id).subscribe(value1 => {

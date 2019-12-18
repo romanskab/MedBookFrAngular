@@ -1,29 +1,34 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ConfigService} from './config.service';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private config: ConfigService) {
   }
+
+  private userURL = this.config.api + '/user';
+  private saveURL = this.config.api + '/save';
 
   getCurrentRole() {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
-    return this.http.get('http://localhost:8080/user/currentRole', {headers, responseType: 'text'});
+    return this.http.get(`${this.userURL}/currentRole`, {headers, responseType: 'text'});
   }
 
   getCurrentUser() {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', token);
-    return this.http.get('http://localhost:8080/user/current', {headers});
+    return this.http.get(`${this.userURL}/current`, {headers});
   }
 
   savePhoto(file) {
-    return this.http.post('http://localhost:8080/save/user/photo', file);
+    return this.http.post(`${this.saveURL}/user/photo`, file);
   }
 
 }

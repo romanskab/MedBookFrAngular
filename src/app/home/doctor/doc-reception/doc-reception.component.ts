@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DoctorService} from '../../../services/doctor.service';
 import {Router} from '@angular/router';
 import {Visit} from '../../../models/Visit';
+import {ConfigService} from '../../../services/config.service';
 
 @Component({
   selector: 'app-doc-reception',
@@ -11,9 +12,11 @@ import {Visit} from '../../../models/Visit';
 export class DocReceptionComponent implements OnInit {
   visitsToday: Visit[];
   visit: Visit;
+  pathToPatientImage;
 
   constructor(private doctorService: DoctorService,
-              private router: Router) {
+              private router: Router,
+              private configService: ConfigService) {
   }
 
   ngOnInit() {
@@ -44,6 +47,11 @@ export class DocReceptionComponent implements OnInit {
 
   saveCurrentVisit() {
     this.doctorService.currentVisitSubject.next(this.visit);
+    if (this.visit.patient.image === null) {
+      this.pathToPatientImage = 'assets/images/photo_patient_default.jpg';
+    } else {
+      this.pathToPatientImage = this.configService.api + '/images/' + this.visit.patient.image;
+    }
     this.toHistoryVisits();
   }
 }

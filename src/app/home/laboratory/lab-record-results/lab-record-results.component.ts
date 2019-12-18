@@ -6,6 +6,7 @@ import {Laboratory} from '../../../models/Laboratory';
 import {Test} from '../../../models/Test';
 import {TestResult} from '../../../models/TestResult';
 import {Router} from '@angular/router';
+import {ConfigService} from '../../../services/config.service';
 
 @Component({
   selector: 'app-lab-record-results',
@@ -26,7 +27,8 @@ export class LabRecordResultsComponent implements OnInit {
   isError = false;
   isSuccess = false;
 
-  constructor(private laboratoryService: LaboratoryService) {
+  constructor(private laboratoryService: LaboratoryService,
+              private configService: ConfigService) {
   }
 
   ngOnInit() {
@@ -43,7 +45,7 @@ export class LabRecordResultsComponent implements OnInit {
       if (this.patient.image === null) {
         this.pathToImage = 'assets/images/photo_patient_default.jpg';
       } else {
-        this.pathToImage = 'http://localhost:8080/images/' + this.patient.image;
+        this.pathToImage = this.configService.api + '/images/' + this.patient.image;
       }
       this.laboratoryService.getTestsTitles().subscribe(value1 => {
         this.testsTitles = value1;
@@ -81,7 +83,7 @@ export class LabRecordResultsComponent implements OnInit {
       this.results = [];
       this.isError = false;
       this.isSuccess = false;
-    }, 2500);
+    }, 2000);
   }
 
 }
